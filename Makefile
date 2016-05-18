@@ -1,11 +1,14 @@
-name := browser-sync
-image_name := ustwo/$(name)
-FLAGS = -v $(PWD)/sandbox:/source \
+name := proper-build
+image_name := properdesign/$(name)
+# FLAGS = -v $(PWD)/sandbox:/source \
+        --name $(name)
+
+FLAGS = -v /Users/shankie/sites/garden/themes/garden/:/source \
         --name $(name)
 
 DOCKER := docker
-DOCKER_TASK := $(DOCKER) run --rm -it
-DOCKER_PROC := $(DOCKER) run -d -it
+DOCKER_TASK := $(DOCKER) run --rm -ti
+DOCKER_PROC := $(DOCKER) run -d -ti
 
 build:
 	@$(DOCKER) build -t $(image_name) .
@@ -16,16 +19,19 @@ push:
 .PHONY: push
 
 shell:
-	@$(call task,--entrypoint=sh,)
+	@$(call task,--entrypoint=bash,)
 .PHONY: shell
+
+run:
+	@$(call task,,svg)
+.PHONY: run
 
 
 ###############################################################################
 # Test                                                                        #
 ###############################################################################
 test-clean:
-	$(DOCKER) rm -vf $(name) testapp
-	$(DOCKER) network rm bs
+	$(DOCKER) rm -vf $(name)
 .PHONY: clean
 
 test-proxy: test-app
@@ -81,9 +87,6 @@ endef
 
 define proc
   $(DOCKER_PROC) $(FLAGS) \
-                 --net bs \
-                 -p 3000:3000 \
-                 -p 3001:3001 \
                  $(image_name) \
                  $1
 endef

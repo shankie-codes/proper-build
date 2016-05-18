@@ -1,0 +1,39 @@
+{
+  "name": "properbear",
+  "version": "1.0.0",
+  "description": "Groundwork Pro Site",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "propergit:.git"
+  },
+  "author": "Proper Design",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "browser-sync": "*",
+    "gulp": "*",
+    "gulp-autoprefixer": "*",
+    "gulp-bower": "*",
+    "gulp-compass": "*",
+    "gulp-concat": "*",
+    "gulp-filter": "*",
+    "gulp-jshint": "*",
+    "gulp-load-plugins": "*",
+    "gulp-minify-css": "*",
+    "gulp-notify": "*",
+    "gulp-plumber": "*",
+    "gulp-rename": "*",
+    "gulp-svg-sprite": "*",
+    "gulp-uglify": "*",
+    "main-bower-files": "*",
+    "jshint" : "*"
+  },
+  "keywords": [
+    "starter",
+    "blank",
+    "basic"
+  ]
+}
