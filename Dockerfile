@@ -19,7 +19,7 @@ ADD package.json /gulp/
 
 RUN npm install
 
-ADD gulpfile.js /gulp
+ADD gulpfile.js config.rb /gulp/
 
 #WORKDIR /source
 

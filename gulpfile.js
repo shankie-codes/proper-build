@@ -19,6 +19,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     jshint = require('gulp-jshint'),
+    sourcemaps = require('gulp-sourcemaps'),
 
 // Styles
     compass = require('gulp-compass'),
@@ -61,7 +62,7 @@ gulp.task('bower-minify-js', function() {
 });
 
 // Concatenate SVGs
-// for some reason this guy needs double quotes
+// for some reason this guy needs double quotes [It's because it's JSON - Ed.]
 gulp.task('svg', function(){
 
     svgConfig = {
@@ -77,7 +78,7 @@ gulp.task('svg', function(){
             }
         }
     };
-    
+
     return gulp.src('/source/_/svg/src/**/*.svg')
     .pipe(svgSprite( svgConfig ))
     .pipe(gulp.dest('/source/_/'));
@@ -102,10 +103,12 @@ gulp.task('scripts', function() {
             }))
         .pipe(concat('themefunctions.js'))
         .pipe(gulp.dest('/source/_/js/'))
-        .pipe(uglify('themefunctions.min.js', {
-          outSourceMap: true,
-          sourceRoot: '/source/_/js/'
+        .pipe(sourcemaps.init())
+        .pipe(uglify())
+        .pipe(rename({
+          suffix: '.min'
         }))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('/source/_/js/'));
 });
 
@@ -121,8 +124,8 @@ gulp.task('sass', function() {
               errorHandler: onError
             }))
         .pipe(compass({
-            config_file: './config.rb',
-            css: '.',
+            config_file: '/source/config.rb',
+            css: '/source',
             sass: '/source/_/scss'
         }))
         .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'ff 17', 'opera 12.1', 'ios 6', 'android 4'))

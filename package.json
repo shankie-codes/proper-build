@@ -27,6 +27,7 @@
     "gulp-plumber": "*",
     "gulp-rename": "*",
     "gulp-svg-sprite": "*",
+    "gulp-sourcemaps": "*",
     "gulp-uglify": "*",
     "main-bower-files": "*",
     "jshint" : "*"
