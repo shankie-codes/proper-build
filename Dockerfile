@@ -5,7 +5,7 @@ RUN npm -g install browser-sync
 RUN npm install -g gulp
 
 RUN apt-get update
-RUN apt-get install -y bzip2 ruby ruby-dev build-essential
+RUN apt-get install -y bzip2 ruby ruby-dev build-essential git
 RUN apt-get clean
 
 RUN gem install compass

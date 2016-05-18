@@ -1,30 +1,30 @@
 // Include gulp and plugins
 var gulp = require('gulp'),
 
-    rename = require('gulp-rename'),
-    bower = require('gulp-bower'),
-    browserSync = require('browser-sync'),
-    filter = require('gulp-filter'),
-    plumber = require('gulp-plumber'),
-    onError = function (err) {
-      console.log(err);
-      this.emit('end')
-    },
+  rename = require('gulp-rename'),
+  bower = require('gulp-bower'),
+  browserSync = require('browser-sync'),
+  filter = require('gulp-filter'),
+  plumber = require('gulp-plumber'),
+  onError = function (err) {
+    console.log(err);
+    this.emit('end')
+  },
 
 // Assets
-    mainBowerFiles = require('main-bower-files'),
-    svgSprite = require('gulp-svg-sprite'),
+  mainBowerFiles = require('main-bower-files'),
+  svgSprite = require('gulp-svg-sprite'),
 
 // Scripts
-    concat = require('gulp-concat'),
-    uglify = require('gulp-uglify'),
-    jshint = require('gulp-jshint'),
-    sourcemaps = require('gulp-sourcemaps'),
+  concat = require('gulp-concat'),
+  uglify = require('gulp-uglify'),
+  jshint = require('gulp-jshint'),
+  sourcemaps = require('gulp-sourcemaps'),
 
 // Styles
-    compass = require('gulp-compass'),
-    minifyCSS = require('gulp-minify-css'),
-    autoprefixer = require('gulp-autoprefixer');
+  compass = require('gulp-compass'),
+  minifyCSS = require('gulp-minify-css'),
+  autoprefixer = require('gulp-autoprefixer');
 
 module.exports = gulp;
 
@@ -34,54 +34,60 @@ module.exports = gulp;
  **************/
 
 // Bower task
-gulp.task('bower', function() { 
-    return bower()
-         .pipe(gulp.dest('bower_components/')) 
+gulp.task('bower-pull', function() { 
+  return bower({ cwd: '/source' })
+     .pipe(gulp.dest('bower_components/')) 
 });
 
 // Concatenate and minify third-party Bower css using main-bower-files
-gulp.task('bower-minify-css', function() {
-    return gulp.src(mainBowerFiles())
-        .pipe(filter('*.css'))
-        .pipe(concat('thirdparty.css'))
-        .pipe(gulp.dest('/source/_/css/'))
-        .pipe(rename('thirdparty.min.css'))
-        .pipe(minifyCSS())
-        .pipe(gulp.dest('/source/_/css/'));
+gulp.task('bower-minify-css', ['bower-pull'], function() {
+  return gulp.src(mainBowerFiles({
+      filter: new RegExp('.*csss$', 'i'),
+      paths: "/source/"
+    }))
+    .pipe(concat('thirdparty.css'))
+    .pipe(gulp.dest('/source/_/css/'))
+    .pipe(rename('thirdparty.min.css'))
+    .pipe(minifyCSS())
+    .pipe(gulp.dest('/source/_/css/'));
 });
 
 // Concatenate and minify third-party Bower scripts using main-bower-files
-gulp.task('bower-minify-js', function() {
-    return gulp.src(mainBowerFiles())
-        .pipe(filter('*.js'))
-        .pipe(concat('thirdparty.js'))
-        .pipe(gulp.dest('/source/_/js/'))
-        .pipe(rename('thirdparty.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('/source/_/js/'));
+gulp.task('bower-minify-js', ['bower-minify-css'], function() {
+  return gulp.src(mainBowerFiles({
+      filter: new RegExp('.*js$', 'i'),
+      paths: "/source/"
+    }))
+    .pipe(concat('thirdparty.js'))
+    .pipe(gulp.dest('/source/_/js'))
+    .pipe(rename('thirdparty.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('/source/_/js'));
 });
+
+gulp.task('bower', ['bower-pull', 'bower-minify-js', 'bower-minify-css']);
 
 // Concatenate SVGs
 // for some reason this guy needs double quotes [It's because it's JSON - Ed.]
 gulp.task('svg', function(){
 
-    svgConfig = {
-        "log": "verbose",
-        "svg": {
-            xmlDeclaration      : true,
-            doctypeDeclaration  : true
-        },
-        "mode": {
-            symbol: {
-                sprite  : "svg/symbols.svg",
-                dest    : './'
-            }
-        }
-    };
+  svgConfig = {
+    "log": "verbose",
+    "svg": {
+      xmlDeclaration      : true,
+      doctypeDeclaration  : true
+    },
+    "mode": {
+      symbol: {
+        sprite  : "svg/symbols.svg",
+        dest    : './'
+      }
+    }
+  };
 
-    return gulp.src('/source/_/svg/src/**/*.svg')
-    .pipe(svgSprite( svgConfig ))
-    .pipe(gulp.dest('/source/_/'));
+  return gulp.src('/source/_/svg/src/**/*.svg')
+  .pipe(svgSprite( svgConfig ))
+  .pipe(gulp.dest('/source/_/'));
 });
 
 /**************
@@ -90,26 +96,26 @@ gulp.task('svg', function(){
 
 // Lint Task
 gulp.task('lint', function() {
-    return gulp.src(['/source/_/js/src/map.js', '/source/_/js/src/themefunctions.js' ])
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'));
+  return gulp.src(['/source/_/js/src/map.js', '/source/_/js/src/themefunctions.js' ])
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
 });
 
 // Concatenate & Minify JS
 gulp.task('scripts', function() {
-    return gulp.src(['/source/_/js/src/**/*.js'])
-        .pipe(plumber({
-              errorHandler: onError
-            }))
-        .pipe(concat('themefunctions.js'))
-        .pipe(gulp.dest('/source/_/js/'))
-        .pipe(sourcemaps.init())
-        .pipe(uglify())
-        .pipe(rename({
-          suffix: '.min'
-        }))
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('/source/_/js/'));
+  return gulp.src(['/source/_/js/src/**/*.js'])
+    .pipe(plumber({
+        errorHandler: onError
+      }))
+    .pipe(concat('themefunctions.js'))
+    .pipe(gulp.dest('/source/_/js/'))
+    .pipe(sourcemaps.init())
+    .pipe(uglify())
+    .pipe(rename({
+      suffix: '.min'
+    }))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('/source/_/js/'));
 });
 
 
@@ -119,17 +125,17 @@ gulp.task('scripts', function() {
 
 // Compile Our Sass/Compass
 gulp.task('sass', function() {
-    return gulp.src('/source/_/scss/**/*.scss')
-        .pipe(plumber({
-              errorHandler: onError
-            }))
-        .pipe(compass({
-            config_file: '/source/config.rb',
-            css: '/source',
-            sass: '/source/_/scss'
-        }))
-        .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'ff 17', 'opera 12.1', 'ios 6', 'android 4'))
-        .pipe(gulp.dest('./'));
+  return gulp.src('/source/_/scss/**/*.scss')
+    .pipe(plumber({
+        errorHandler: onError
+      }))
+    .pipe(compass({
+      config_file: '/source/config.rb',
+      css: '/source',
+      sass: '/source/_/scss'
+    }))
+    .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'ff 17', 'opera 12.1', 'ios 6', 'android 4'))
+    .pipe(gulp.dest('./'));
 
 });
 
@@ -140,17 +146,17 @@ gulp.task('sass', function() {
 
 // Browsersync
 gulp.task('browser-sync', function() {
-    browserSync({
-        proxy: "localhost/groundwork",
-        files: ["style.css", "*.js", "*.php", "*.html"]
-    });
+  browserSync({
+    proxy: "localhost/groundwork",
+    files: ["style.css", "*.js", "*.php", "*.html"]
+  });
 });
 
 // Watch Files For Changes
 gulp.task('watch', function() {
-    gulp.watch('/source/_/js/src/**/*.js', ['lint', 'scripts']);
-    gulp.watch('/source/_/scss/**/*.scss', ['sass']);
-    gulp.watch('/source/_/svg/src/**/*.svg', ['svg']);
+  gulp.watch('/source/_/js/src/**/*.js', ['lint', 'scripts']);
+  gulp.watch('/source/_/scss/**/*.scss', ['sass']);
+  gulp.watch('/source/_/svg/src/**/*.svg', ['svg']);
 });
 
 // Default without browser sync
