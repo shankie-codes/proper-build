@@ -105,7 +105,7 @@ gulp.task('svg', function(){
 
 // Lint Task
 gulp.task('lint', function() {
-  return gulp.src(['/source/' + config.js.srcDir + '/**/*.js'])
+  return gulp.src(['/source/' + config.js.srcDir + '/**/*.js', '!/source/' + config.js.srcDir + '/modernizr.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });

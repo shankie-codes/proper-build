@@ -23,7 +23,7 @@ shell:
 .PHONY: shell
 
 run:
-	@$(call task,,svg)
+	@$(call task,,lint)
 .PHONY: run
 
 
