@@ -1,6 +1,6 @@
 // Include gulp and plugins
 var gulp = require('gulp'),
-  watch = require('gulp-watch');
+  watch = require('gulp-watch'),
   rename = require('gulp-rename'),
   bower = require('gulp-bower'),
   browserSync = require('browser-sync'),
@@ -29,6 +29,9 @@ var gulp = require('gulp'),
 
 module.exports = gulp;
 
+process.on('SIGINT', function() {
+    process.exit();
+});
 
 /**************
  * Assets
