@@ -46,7 +46,7 @@ gulp.task('bower-install', function() { 
 // Concatenate and minify third-party Bower css using main-bower-files
 gulp.task('bower-minify-css', ['bower-pull'], function() {
   return gulp.src(mainBowerFiles({
-      filter: new RegExp('.*csss$', 'i'),
+      filter: new RegExp('.*css$', 'i'),
       paths: "/source/"
     }))
     .pipe(concat('thirdparty.css'))
