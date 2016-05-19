@@ -30,6 +30,7 @@
     "gulp-sourcemaps": "*",
     "gulp-uglify": "*",
     "main-bower-files": "*",
+    "gulp-watch": "*",
     "jshint" : "*"
   },
   "keywords": [

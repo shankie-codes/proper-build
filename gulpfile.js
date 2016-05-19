@@ -1,6 +1,6 @@
 // Include gulp and plugins
 var gulp = require('gulp'),
-
+  watch = require('gulp-watch');
   rename = require('gulp-rename'),
   bower = require('gulp-bower'),
   browserSync = require('browser-sync'),
@@ -130,7 +130,7 @@ gulp.task('sass', function() {
         errorHandler: onError
       }))
     .pipe(compass({
-      config_file: '/source/config.rb',
+      config_file: '/gulp/config.rb',
       css: '/source',
       sass: '/source/_/scss'
     }))
@@ -159,10 +159,20 @@ gulp.task('watch', function() {
   gulp.watch('/source/_/svg/src/**/*.svg', ['svg']);
 });
 
+
+gulp.task('sass-watch', function () {
+    return gulp.src('/source/_/scss/**/*.scss')
+        .pipe(watch('/source/_/scss/**/*.scss'));
+});
+
+//gulp.task('sass-watch', function () {
+//  watch({ glob: '/source/_/scss/**/*.scss' }); // Run 'lint' task for those files
+//});
+
 // Default without browser sync
 gulp.task('_default_nosync', ['lint', 'sass', 'scripts', 'svg', 'watch']);
 
 
 // Default Task
 // gulp.task('default', ['lint', 'sass', 'scripts', 'svg', 'watch', 'browser-sync']);
-gulp.task('default', ['lint', 'sass', 'scripts', 'svg', 'watch']);
+gulp.task('default', ['sass']);
