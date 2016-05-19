@@ -7,6 +7,7 @@ var gulp = require('gulp'),
   filter = require('gulp-filter'),
   plumber = require('gulp-plumber'),
   path = require('path'),
+  config = require('./proper-config.json'),
   onError = function (err) {
     console.log(err);
     this.emit('end')
@@ -29,9 +30,13 @@ var gulp = require('gulp'),
 
 module.exports = gulp;
 
+// Accept SIGINT from Docker ctrl-c
 process.on('SIGINT', function() {
     process.exit();
 });
+
+// We're only interested in the build object of proper-config.json
+config = config.build;
 
 /**************
  * Assets
@@ -40,20 +45,20 @@ process.on('SIGINT', function() {
 // Bower task
 gulp.task('bower-install', function() { 
   return bower({ cwd: '/source' })
-     .pipe(gulp.dest('bower_components/')) 
+     .pipe(gulp.dest(config.bower.installDest)) 
 });
 
 // Concatenate and minify third-party Bower css using main-bower-files
-gulp.task('bower-minify-css', ['bower-pull'], function() {
+gulp.task('bower-minify-css', ['bower-install'], function() {
   return gulp.src(mainBowerFiles({
       filter: new RegExp('.*css$', 'i'),
       paths: "/source/"
     }))
-    .pipe(concat('thirdparty.css'))
-    .pipe(gulp.dest('/source/_/css/'))
-    .pipe(rename('thirdparty.min.css'))
+    .pipe(concat(config.bower.cssDestName))
+    .pipe(gulp.dest('/source/' + config.bower.cssDestDir))
+    .pipe(rename(config.bower.cssMinDestName))
     .pipe(minifyCSS())
-    .pipe(gulp.dest('/source/_/css/'));
+    .pipe(gulp.dest('/source/' + config.bower.cssMinDestDir));
 });
 
 // Concatenate and minify third-party Bower scripts using main-bower-files
@@ -62,14 +67,14 @@ gulp.task('bower-minify-js', ['bower-minify-css'], function() {
       filter: new RegExp('.*js$', 'i'),
       paths: "/source/"
     }))
-    .pipe(concat('thirdparty.js'))
-    .pipe(gulp.dest('/source/_/js'))
-    .pipe(rename('thirdparty.min.js'))
+    .pipe(concat(config.bower.jsDestName))
+    .pipe(gulp.dest('/source/' + config.bower.jsDestDir))
+    .pipe(rename(config.bower.jsMinDestName))
     .pipe(uglify())
-    .pipe(gulp.dest('/source/_/js'));
+    .pipe(gulp.dest('/source/' + config.bower.jsMinDestDir));
 });
 
-gulp.task('bower', ['bower-pull', 'bower-minify-js', 'bower-minify-css']);
+gulp.task('bower', ['bower-install', 'bower-minify-js', 'bower-minify-css']);
 
 // Concatenate SVGs
 // for some reason this guy needs double quotes [It's because it's JSON - Ed.]
@@ -83,15 +88,15 @@ gulp.task('svg', function(){
     },
     "mode": {
       symbol: {
-        sprite  : "symbols.svg",
+        sprite  : config.svg.destName,
         dest    : './'
       }
     }
   };
 
-  return gulp.src('/source/_/svg/src/**/*.svg')
+  return gulp.src('/source/' + config.svg.srcDir + '**/*.svg')
   .pipe(svgSprite( svgConfig ))
-  .pipe(gulp.dest('/source/_/svg/'));
+  .pipe(gulp.dest('/source/' + config.svg.destDir));
 });
 
 /**************
@@ -100,27 +105,26 @@ gulp.task('svg', function(){
 
 // Lint Task
 gulp.task('lint', function() {
-  return gulp.src(['/source/_/js/src/**/*.js'])
+  return gulp.src(['/source/' + config.js.srcDir + '/**/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
 
 // Concatenate & Minify JS
 gulp.task('scripts', function() {
-  console.log('bum');
-  return gulp.src(['/source/_/js/src/**/*.js'])
+  return gulp.src(['/source/' + config.js.srcDir + '/**/*.js'])
     .pipe(plumber({
         errorHandler: onError
       }))
-    .pipe(concat('themefunctions.js'))
-    .pipe(gulp.dest('/source/_/js/'))
+    .pipe(concat(config.js.destName))
+    .pipe(gulp.dest('/source/' + config.js.destDir))
     .pipe(sourcemaps.init())
     .pipe(uglify())
     .pipe(rename({
       suffix: '.min'
     }))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('/source/_/js/'));
+    .pipe(gulp.dest('/source/' + config.js.destDir));
 });
 
 
@@ -129,13 +133,28 @@ gulp.task('scripts', function() {
  **************/
 
 // Compile Our Sass/Compass
+//gulp.task('sass', function() {
+//  return gulp.src(['/source/' + config.sass.srcDir + '/**/*.scss'])
+//    .pipe(plumber({
+//        errorHandler: onError
+//      }))
+//    .pipe(compass({
+//      config_file: '/build/config.rb',
+//      css: '/source/' + config.sass.destDir,
+//      sass: '/source/' + config.sass.srcDir
+//    }))
+//    .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'ff 17', 'opera 12.1', 'ios 6', 'android 4'))
+//    .pipe(gulp.dest('./' + config.sass.destDir));
+//
+//});
+//
 gulp.task('sass', function() {
   return gulp.src('/source/_/scss/**/*.scss')
     .pipe(plumber({
         errorHandler: onError
       }))
     .pipe(compass({
-      config_file: '/build/config.rb',
+      config_file: '/gulp/config.rb',
       css: '/source',
       sass: '/source/_/scss'
     }))
@@ -143,7 +162,6 @@ gulp.task('sass', function() {
     .pipe(gulp.dest('./'));
 
 });
-
 
 /**************
  * BrowserSync & Watcher
@@ -158,12 +176,11 @@ gulp.task('browser-sync', function() {
 });
 
 // Watch Files For Changes
-
 gulp.task('watch', function(){
-  watch(path.resolve('/source/_/scss/**/*.scss'), { usePolling: true, interval: 2000 }, function(file) {
+  watch(path.resolve('/source/' + config.sass.srcDir + '/**/*.scss'), { usePolling: true, interval: 2000 }, function(file) {
       gulp.start('sass')
   });
-  watch(path.resolve('/source/_/js/src/**/*.js'), { usePolling: true, interval: 2000 }, function(file) {
+  watch(path.resolve('/source/' + config.js.srcDir + '/**/*.js'), { usePolling: true, interval: 2000 }, function(file) {
       gulp.start('lint');
       gulp.start('scripts');
   });
