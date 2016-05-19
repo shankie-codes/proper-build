@@ -23,7 +23,7 @@ shell:
 .PHONY: shell
 
 run:
-	@$(call task,,watch-test)
+	@$(call task,,watch)
 .PHONY: run
 
 

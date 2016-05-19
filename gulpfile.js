@@ -154,18 +154,16 @@ gulp.task('browser-sync', function() {
 });
 
 // Watch Files For Changes
-gulp.task('watch', function() {
-  gulp.watch('/source/_/js/src/**/*.js', ['lint', 'scripts']);
-  gulp.watch('/source/_/scss/**/*.scss', ['sass']);
-  gulp.watch('/source/_/svg/src/**/*.svg', ['svg']);
-});
-
 
 gulp.task('watch', function(){
   watch(path.resolve('/source/_/scss/**/*.scss'), { usePolling: true, interval: 2000 }, function(file) {
       gulp.start('sass')
-  })
   });
+  watch(path.resolve('/source/_/js/src/**/*.js'), { usePolling: true, interval: 2000 }, function(file) {
+      gulp.start('lint');
+      gulp.start('scripts');
+  });
+});
 
 //gulp.task('sass-watch', function () {
 //  watch({ glob: '/source/_/scss/**/*.scss' }); // Run 'lint' task for those files
