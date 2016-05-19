@@ -17,16 +17,16 @@ The image has a built in configuration for file inputs and outputs based on Prop
 
 ### Docker run command
 
-The image uses `gulp` at its entrypoint, meaning that running the image runs Gulp using your `proper-config.json`. If you want to run the default task, run:
+The image uses `gulp` at its entrypoint, meaning that running the image runs Gulp using your `proper-config.json`. If you want to run the default task in your current directory, run:
 
 ```
-docker run --rm -ti properdesign/proper-build
+docker run --rm -ti -v $(PWD):/source --name proper-build properdesign/proper-build
 ```
 
 To run any other task, e.g. sass, run:
 
 ```
-docker run --rm -ti properdesign/proper-build sass
+docker run --rm -ti -v $(PWD):/source --name proper-build properdesign/proper-build sass
 ```
 
 ### Aliasing
