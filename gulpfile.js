@@ -168,14 +168,9 @@ gulp.task('watch', function(){
   });
 });
 
-//gulp.task('sass-watch', function () {
-//  watch({ glob: '/source/_/scss/**/*.scss' }); // Run 'lint' task for those files
-//});
-
 // Default without browser sync
 gulp.task('_default_nosync', ['lint', 'sass', 'scripts', 'svg', 'watch']);
 
 
 // Default Task
-// gulp.task('default', ['lint', 'sass', 'scripts', 'svg', 'watch', 'browser-sync']);
-gulp.task('default', ['sass']);
+gulp.task('default', ['lint', 'sass', 'scripts', 'svg', 'watch']);
