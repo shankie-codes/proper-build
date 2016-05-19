@@ -162,7 +162,17 @@ gulp.task('watch', function() {
 
 gulp.task('sass-watch', function () {
     return gulp.src('/source/_/scss/**/*.scss')
-        .pipe(watch('/source/_/scss/**/*.scss'));
+        .pipe(watch('/source/_/scss/**/*.scss'))
+        //.pipe(plumber({
+        //    errorHandler: onError
+        //  }))
+        .pipe(compass({
+          config_file: '/gulp/config.rb',
+          css: '/source',
+          sass: '/source/_/scss'
+        }))
+        //.pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'ff 17', 'opera 12.1', 'ios 6', 'android 4'))
+        .pipe(gulp.dest('./'));
 });
 
 //gulp.task('sass-watch', function () {
