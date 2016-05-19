@@ -38,7 +38,7 @@ process.on('SIGINT', function() {
  **************/
 
 // Bower task
-gulp.task('bower-pull', function() { 
+gulp.task('bower-install', function() { 
   return bower({ cwd: '/source' })
      .pipe(gulp.dest('bower_components/')) 
 });

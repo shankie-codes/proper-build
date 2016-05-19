@@ -1,118 +1,43 @@
-# Docker image for browser-sync
+# proper-build – a Docker image for running Proper Design's Gulp pipeline
 
-This Docker image wraps [BrowserSync](http://www.browsersync.io/) exposing its
-command-line interface as the `ENTRYPOINT`.  This means you can use this image
-as drop-in replacement for Browser Sync's CLI.
+## What it does
 
-**Note**: please note this document assumes you're using Docker 1.9 or above.
+This image wraps up a pipeline that exposes the following Gulp tasks:
 
-It has been tested with Docker for Mac and with Docker Machine on OSX.
+* sass – Sass/Compass compilation
+* scripts – lints, concatenates and minifies site scripts
+* svg – produces an SVG sprite
+* bower-install – runs `bower install` from the bower.json in the project's root. Also runs main-bower-files to concatenate into a single thirdparty.min.js and thirdparty.min.css
 
+## Using this image
 
-## Table of Contents
+### Configuration
 
-* [How to use this image](#how-to-use-this-image).
-* [Docker Machine in OSX](#docker-machine-in-osx).
+The image has a built in configuration for file inputs and outputs based on Proper Design's [WordPress starter theme] (https://github.com/Bones5/Proper-Bear). To use your own configuration, take a copy of `proper-config-template.json`, rename to `proper-config.json` and drop it in the directory that you're going to be running `gulp` from.
 
+### Docker run command
 
-## How to use this image
+The image uses `gulp` at its entrypoint, meaning that running the image runs Gulp using your `proper-config.json`. If you want to run the default task, run:
 
-The basic Browser Sync examples translated are the exact same commands with
-the docker command prefixing it.
-
-### Static sites
-
-The following case publishes port 3000 and port 3001 so you can use the
-static server and configure Browser Sync as always.
-
-```sh
-docker run -dt \
-           --name browser-sync \
-           -p 3000:3000 \
-           -p 3001:3001 \
-           -v $(PWD):/source \
-           -w /source \
-           ustwo/browser-sync \
-           start --server --files "css/*.css"
+```
+docker run --rm -ti properdesign/proper-build
 ```
 
-### Dynamic sites
+To run any other task, e.g. sass, run:
 
-In this case, you have to let Docker know how to resolve the host you are
-proxying to.  There are a couple of ways to do this so we'll go one by one.
-
-#### Link
-
-A docker link is a one-way connection between two containers.  Order matters
-so you have to **first** start your app and then link Browser Sync to it:
-
-```sh
-docker run -dt --name myapp -p 8000:8000 myimage
-
-docker run -dt \
-           --name browser-sync \
-           --link myapp \
-           -p 3000:3000 \
-           -p 3001:3001 \
-           ustwo/browser-sync \
-           start --proxy "myapp:8000" --files "css/*.css"
+```
+docker run --rm -ti properdesign/proper-build sass
 ```
 
-Notice the name of the app and the link are the same, and the browser sync
-proxy flag has the same name as well as the exposed port of your app.  There
-is no need to use the `-p 8000:8000` flag, it is just to make it more clear.
+### Aliasing
 
+Typing out all of that is a bit of a drag. You can make this less painful by adding something like this to your `.bash_profile`, `.bashrc` or whatever
 
-#### Custom network
+```
+export proper-build="docker run --rm -ti properdesign/proper-build"
 
-A docker network is a connection between multiple containers.  Unlike links,
-order does not matter so it is a more robust solution, but it requires setting
-up the network before running the containers.  It is a one-time thing though:
-
-```sh
-docker network create bs
 ```
 
-Then you start both services as follows:
+## To-do
 
-```sh
-docker run -dt --name myapp --net bs myimage
-
-docker run -dt \
-           --name browser-sync \
-           --net bs \
-           -p 3000:3000 \
-           -p 3001:3001 \
-           ustwo/browser-sync \
-           start --proxy "myapp:8000" --files "css/*.css"
-```
-
-
-### Config file
-
-Given the image exposes Browser Sync's CLI as is, you can use a config file
-as well.
-
-```sh
-docker run -dt \
-           --name browser-sync \
-           --net bs \
-           -p 3000:3000 \
-           -p 3001:3001 \
-           ustwo/browser-sync \
-           -v $(PWD)/config.js:/source/config.js \
-           start --config config.js
-```
-
-
-## Docker Machine in OSX
-
-Docker Machine with Virtualbox has limited support of filesystem events.
-[BrowserSync](http://www.browsersync.io/) uses filesystem events as its main
-strategy to watch for changes and falls back to polling otherwise.  If you are
-in this situation you can only use the polling strategy as shown in `sandbox/polling.js`.
-
-
-## Maintainers
-
-* [Arnau Siches](mailto:arnau@ustwo.com)
+* BrowserSync. Not working yet, open issue on GitHub
