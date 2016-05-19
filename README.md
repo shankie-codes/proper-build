@@ -29,6 +29,14 @@ To run any other task, e.g. sass, run:
 docker run --rm -ti -v $(PWD):/source --name proper-build properdesign/proper-build sass
 ```
 
+### Custom config
+
+By default, the image bakes in a set of paths that are defined in `/build/proper-config.json`. You can override these paths by volume-mapping your own proper-config.json adding the following to your `docker run`:
+
+`-v proper-config.json:/build/proper-config.json`
+
+You can also override any of the other configuration files (e.g. package.json, gulpfile.js or config.rb) by volume-mapping them into `/build`
+
 ### Aliasing
 
 Typing out all of that is a bit of a drag. You can make this less painful by adding something like this to your `.bash_profile`, `.bashrc` or whatever

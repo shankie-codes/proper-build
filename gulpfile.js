@@ -83,7 +83,7 @@ gulp.task('svg', function(){
     },
     "mode": {
       symbol: {
-        sprite  : "svg/symbols.svg",
+        sprite  : "symbols.svg",
         dest    : './'
       }
     }
@@ -91,7 +91,7 @@ gulp.task('svg', function(){
 
   return gulp.src('/source/_/svg/src/**/*.svg')
   .pipe(svgSprite( svgConfig ))
-  .pipe(gulp.dest('/source/_/'));
+  .pipe(gulp.dest('/source/_/svg/'));
 });
 
 /**************
@@ -100,13 +100,14 @@ gulp.task('svg', function(){
 
 // Lint Task
 gulp.task('lint', function() {
-  return gulp.src(['/source/_/js/src/map.js', '/source/_/js/src/themefunctions.js' ])
+  return gulp.src(['/source/_/js/src/**/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
 
 // Concatenate & Minify JS
 gulp.task('scripts', function() {
+  console.log('bum');
   return gulp.src(['/source/_/js/src/**/*.js'])
     .pipe(plumber({
         errorHandler: onError
@@ -134,7 +135,7 @@ gulp.task('sass', function() {
         errorHandler: onError
       }))
     .pipe(compass({
-      config_file: '/gulp/config.rb',
+      config_file: '/build/config.rb',
       css: '/source',
       sass: '/source/_/scss'
     }))

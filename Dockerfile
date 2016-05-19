@@ -13,13 +13,13 @@ RUN gem install compass
 # We only needed these to build Compass
 RUN apt-get remove -y ruby-dev build-essential
 
-WORKDIR /gulp
+WORKDIR /build
 
-ADD package.json /gulp/
+ADD package.json /build/
 
 RUN npm install
 
-ADD gulpfile.js config.rb /gulp/
+ADD gulpfile.js config.rb proper-config.json /build/
 
 #WORKDIR /source
 

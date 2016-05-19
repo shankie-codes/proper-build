@@ -1,0 +1,28 @@
+{
+  build : {
+    bower : {
+      "installDest" : "bower_components",
+      "cssDestName": "thirdparty.css",
+      "cssDestDir": "_/css",
+      "cssMinDestName": "thirdparty.min.css",
+      "cssMinDestDir": "_/css",
+      "jsDestName": "thirdparty.js",
+      "jsDestDir": "_/js",
+      "jsMinDestName": "thirdparty.min.js",
+      "jsMinDestDir": "_js"
+    },
+    svg : {
+      "srcDir" : "_/svg/src",
+      "destName" : "symbols.svg",
+      "destDir" : "_svg"
+    },
+    js : {
+      "srcDir" : "_/js/src",
+      "destDir" : "_/js"
+    },
+    sass : {
+      "srcDir" : "_/scss",
+      "destDir" : "."
+    }
+  }
+}
