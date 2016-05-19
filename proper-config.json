@@ -14,7 +14,7 @@
     "svg" : {
       "srcDir" : "_/svg/src",
       "destName" : "symbols.svg",
-      "destDir" : "_svg"
+      "destDir" : "_/svg"
     },
     "js" : {
       "srcDir" : "_/js/src",
