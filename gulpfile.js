@@ -133,35 +133,21 @@ gulp.task('scripts', function() {
  **************/
 
 // Compile Our Sass/Compass
-//gulp.task('sass', function() {
-//  return gulp.src(['/source/' + config.sass.srcDir + '/**/*.scss'])
-//    .pipe(plumber({
-//        errorHandler: onError
-//      }))
-//    .pipe(compass({
-//      config_file: '/build/config.rb',
-//      css: '/source/' + config.sass.destDir,
-//      sass: '/source/' + config.sass.srcDir
-//    }))
-//    .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'ff 17', 'opera 12.1', 'ios 6', 'android 4'))
-//    .pipe(gulp.dest('./' + config.sass.destDir));
-//
-//});
-//
 gulp.task('sass', function() {
-  return gulp.src('/source/_/scss/**/*.scss')
+  return gulp.src(['/source/' + config.sass.srcDir + '/**/*.scss'])
     .pipe(plumber({
         errorHandler: onError
       }))
     .pipe(compass({
-      config_file: '/gulp/config.rb',
-      css: '/source',
-      sass: '/source/_/scss'
+      config_file: './config.rb',
+      css: '/source/' + config.sass.destDir,
+      sass: '/source/' + config.sass.srcDir
     }))
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'ff 17', 'opera 12.1', 'ios 6', 'android 4'))
-    .pipe(gulp.dest('./'));
+    .pipe(gulp.dest('./' + config.sass.destDir));
 
 });
+
 
 /**************
  * BrowserSync & Watcher
