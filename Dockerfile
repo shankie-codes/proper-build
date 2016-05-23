@@ -5,7 +5,7 @@ RUN npm -g install browser-sync
 RUN npm install -g gulp
 
 RUN apt-get update
-RUN apt-get install -y bzip2 ruby ruby-dev build-essential git
+RUN apt-get install -y bzip2 ruby ruby-dev build-essential git jshon
 RUN apt-get clean
 
 RUN gem install compass
@@ -21,8 +21,10 @@ RUN npm install
 
 ADD gulpfile.js config.rb proper-config.json /build/
 
+ADD entrypoint.sh /
+
 #WORKDIR /source
 
 #RUN npm link gulp
 
-ENTRYPOINT ["gulp"]
+ENTRYPOINT ["/entrypoint.sh"]
