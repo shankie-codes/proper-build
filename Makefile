@@ -3,7 +3,7 @@ image_name := properdesign/$(name)
 # FLAGS = -v $(PWD)/sandbox:/source \
         --name $(name)
 
-FLAGS = -v /Users/shankie/sites/garden/themes/garden/:/source \
+FLAGS = -v /Users/shankie/sites/garden/:/source \
         --name $(name)
 
 DOCKER := docker
@@ -23,7 +23,7 @@ shell:
 .PHONY: shell
 
 run:
-	@$(call task,,watch)
+	@$(call task,,)
 .PHONY: run
 
 

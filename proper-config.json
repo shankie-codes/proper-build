@@ -1,5 +1,6 @@
 {
   "build" : {
+    "source" : ".",
     "bower" : {
       "installDest" : "bower_components",
       "cssDestName": "thirdparty.css",
