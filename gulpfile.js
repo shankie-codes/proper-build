@@ -7,7 +7,7 @@ var gulp = require('gulp'),
   filter = require('gulp-filter'),
   plumber = require('gulp-plumber'),
   path = require('path'),
-  config = require('./proper-config.json'),
+  config = require('/source/proper-config.json'),
   onError = function (err) {
     console.log(err);
     this.emit('end')

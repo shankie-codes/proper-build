@@ -26,5 +26,9 @@
       "srcDir" : "_/scss",
       "destDir" : ""
     }
-  }
+  },
+  "plugins" : [
+  ],
+  "themes" : [
+  ]
 }

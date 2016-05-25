@@ -20,6 +20,7 @@ ADD package.json /build/
 RUN npm install
 
 ADD gulpfile.js config.rb proper-config.json /build/
+ADD ./js /js
 
 ADD entrypoint.sh /
 
