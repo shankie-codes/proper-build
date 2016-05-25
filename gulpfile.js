@@ -179,4 +179,4 @@ gulp.task('_default_nosync', ['lint', 'sass', 'scripts', 'svg', 'watch']);
 
 
 // Default Task
-gulp.task('default', ['lint', 'sass', 'scripts', 'svg', 'watch']);
+gulp.task('default', ['lint', 'sass', 'scripts', 'watch']);

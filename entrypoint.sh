@@ -58,9 +58,6 @@ if [ -f /source/proper-config.json ]; then
   elif [ "." == $(node -pe 'JSON.parse(process.argv[1]).build.source' "$(cat /source/proper-config.json)") ]; then
     # We have .build.source, but it's set to ".". That's not very helpful
     add_build_source
-  else
-    # We have a value for .source. Looks like everything is configured
-    echo "proper-config.json found."
   fi
 else
   # We didn't find a config file. Copy across the entire existing ont
@@ -71,4 +68,4 @@ else
 fi
 
 # Do a gulp.
-gulp scripts "$@"
+gulp "$@"
