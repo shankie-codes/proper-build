@@ -39,8 +39,6 @@ add_build_source(){
   echo "Set $SOURCE_PATH as the build root."
 }
 
-#jshon -e build -e source -u < /build/proper-config.json
-
 # if [[ -z `find /source \( -name node_modules -prune \) -o -name "proper-config.json" | grep proper-config.json` ]]; then
 if [ -f /source/proper-config.json ]; then
   # We found a config file. Check if it contains a .build attribute
@@ -62,7 +60,7 @@ if [ -f /source/proper-config.json ]; then
     add_build_source
   else
     # We have a value for .source. Looks like everything is configured
-    echo "We have a source"
+    echo "proper-config.json found."
   fi
 else
   # We didn't find a config file. Copy across the entire existing ont
@@ -72,6 +70,5 @@ else
   add_build_source
 fi
 
-
 # Do a gulp.
-# gulp scripts "$@"
+gulp scripts "$@"
