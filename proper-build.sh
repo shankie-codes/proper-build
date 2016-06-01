@@ -12,7 +12,7 @@ if [ "$1" == "pull" ]; then
   exit
 fi
 
-BUILD_CONTAINER_ID=$(docker ps --filter name=newmet --format "{{.ID}}")
+BUILD_CONTAINER_ID=$(docker ps --filter name=proper-build --format "{{.ID}}")
 
 # Remove the container if it's hanging around
 if [ ! -z $BUILD_CONTAINER_ID ]; then
