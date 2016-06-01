@@ -22,6 +22,8 @@ RUN npm install
 ADD gulpfile.js config.rb proper-config.json /build/
 ADD ./js /js
 
+RUN mkdir /source # In case we're building on the server and not volume-mapping in
+
 ADD entrypoint.sh /
 
 #WORKDIR /source
