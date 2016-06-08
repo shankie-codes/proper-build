@@ -67,7 +67,7 @@ gulp.task('bower-minify-css', ['bower-install'], function() {
 gulp.task('bower-minify-js', ['bower-minify-css'], function() {
   return gulp.src(mainBowerFiles({
       filter: new RegExp('.*js$', 'i'),
-      paths: "/source/"
+      paths: source
     }))
     .pipe(concat(config.bower.jsDestName))
     .pipe(gulp.dest(source + config.bower.jsDestDir))
@@ -156,9 +156,9 @@ gulp.task('sass', function() {
  **************/
 
 // Browsersync
-gulp.task('browser-sync', function() {
+gulp.task('browsersync', function() {
   browserSync({
-    proxy: "localhost/groundwork",
+    proxy: "groundwork",
     files: ["style.css", "*.js", "*.php", "*.html"]
   });
 });
@@ -173,10 +173,6 @@ gulp.task('watch', function(){
       gulp.start('scripts');
   });
 });
-
-// Default without browser sync
-gulp.task('_default_nosync', ['lint', 'sass', 'scripts', 'svg', 'watch']);
-
 
 // Default Task
 gulp.task('default', ['lint', 'sass', 'scripts', 'watch']);

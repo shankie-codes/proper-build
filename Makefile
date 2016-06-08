@@ -7,7 +7,7 @@ FLAGS = -v /Users/shankie/sites/garden/:/source \
         --name $(name)
 
 DOCKER := docker
-DOCKER_TASK := $(DOCKER) run --rm -ti
+DOCKER_TASK := $(DOCKER) run --rm -ti -p 3000:3000 -p 3001:3001
 DOCKER_PROC := $(DOCKER) run -d -ti
 
 build:
@@ -23,7 +23,7 @@ shell:
 .PHONY: shell
 
 run:
-	@$(call task,,)
+	@$(call task,,browsersync)
 .PHONY: run
 
 ###############################################################################
