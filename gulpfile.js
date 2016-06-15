@@ -79,14 +79,27 @@ gulp.task('bower-minify-js', ['bower-minify-css'], function() {
 gulp.task('bower', ['bower-install', 'bower-minify-js', 'bower-minify-css']);
 
 // Concatenate SVGs
-// for some reason this guy needs double quotes [It's because it's JSON - Ed.]
+// for some reason this guy needs double quotes 
 gulp.task('svg', function(){
 
   svgConfig = {
     "log": "verbose",
     "svg": {
-      xmlDeclaration      : true,
-      doctypeDeclaration  : true
+      xmlDeclaration : true,
+      namespaceIDs : false,
+      doctypeDeclaration : true
+    },
+    "shape" : {
+      "id" : {
+        "separator" : "bum",
+        "generator" : function(path){
+          // This is the regex to extract the filename [^/]*(?=\.[^.]+($|\?))
+          //var re = /[^/]*(?=\.[^.]+($|\?))/;
+
+          return /[^/]*(?=\.[^.]+($|\?))/.exec(path)[0]
+          //return path
+        }
+      }
     },
     "mode": {
       symbol: {
