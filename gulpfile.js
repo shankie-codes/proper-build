@@ -83,6 +83,7 @@ gulp.task('bower', ['bower-install', 'bower-minify-js', 'bower-minify-css']);
 gulp.task('svg', function(){
 
   svgConfig = {
+    "log": "verbose",
     "svg": {
       xmlDeclaration : true,
       namespaceIDs : false,
