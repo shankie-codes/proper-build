@@ -91,13 +91,9 @@ gulp.task('svg', function(){
     },
     "shape" : {
       "id" : {
-        "separator" : "bum",
         "generator" : function(path){
           // This is the regex to extract the filename [^/]*(?=\.[^.]+($|\?))
-          //var re = /[^/]*(?=\.[^.]+($|\?))/;
-
           return /[^/]*(?=\.[^.]+($|\?))/.exec(path)[0]
-          //return path
         }
       }
     },
