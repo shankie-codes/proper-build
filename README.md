@@ -37,13 +37,15 @@ By default, the image bakes in a set of paths that are defined in `/build/proper
 
 You can also override any of the other configuration files (e.g. package.json, gulpfile.js or config.rb) by volume-mapping them into `/build`
 
-### Aliasing
+### Wrapper script
 
-Typing out all of that is a bit of a drag. You can make this less painful by adding something like this to your `.bash_profile`, `.bashrc` or whatever
+Typing this out every time is a drag. This repo includes a wrapper script that you can add to your `/usr/local/bin` by doing:
 
 ```
-export proper-build="docker run --rm -ti properdesign/proper-build"
-
+TMPDIR=$(dirname $(mktemp -u)) && \
+  curl -sLo "$TMPDIR/properbuild.zip" "https://github.com/shankiesan/proper-build/archive/master.zip" && \
+  unzip -jq -o "$TMPDIR/properbuild.zip" -d $TMPDIR && \
+  cp "$TMPDIR/proper-build.sh" /usr/local/bin/proper-build
 ```
 
 ## To-do
