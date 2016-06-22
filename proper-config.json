@@ -15,7 +15,12 @@
     "svg" : {
       "srcDir" : "_/svg/src",
       "destName" : "symbols.svg",
-      "destDir" : "_/svg"
+      "destDir" : "_/svg",
+      "svgDocumentSettings": {
+        "xmlDeclaration" : true,
+        "namespaceIDs" : false,
+        "doctypeDeclaration" : true
+      }
     },
     "js" : {
       "srcDir" : "_/js/src",

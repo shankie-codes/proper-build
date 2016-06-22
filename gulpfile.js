@@ -84,10 +84,10 @@ gulp.task('svg', function(){
 
   svgConfig = {
     "log": "verbose",
-    "svg": {
-      xmlDeclaration : true,
+    "svg":  config.svg.svgDocumentSettings || {
+      xmlDeclaration : false,
       namespaceIDs : false,
-      doctypeDeclaration : true
+      doctypeDeclaration : false
     },
     "shape" : {
       "id" : {
