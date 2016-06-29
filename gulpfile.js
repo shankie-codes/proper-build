@@ -145,6 +145,7 @@ gulp.task('scripts', function() {
 
 // Compile Our Sass/Compass
 gulp.task('sass', function() {
+
   return gulp.src([source + config.sass.srcDir + '/**/*.scss'])
     .pipe(plumber({
         errorHandler: onError
@@ -154,9 +155,18 @@ gulp.task('sass', function() {
       css: source + config.sass.destDir,
       sass: source + config.sass.srcDir
     }))
-    .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'ff 17', 'opera 12.1', 'ios 6', 'android 4'))
-    .pipe(gulp.dest('./' + config.sass.destDir));
+    .pipe(autoprefixer({
+      browsers: ['last 2 versions', 'safari > 5', 'ie > 8', 'ff > 17', 'opera > 12.1', 'ios > 6', 'android > 4']
+    }))
+    .pipe(gulp.dest(source + config.sass.destDir));
 
+});
+
+gulp.task('autoprefixer', function () {
+  return gulp.src(source + '/style.css')
+    .pipe(autoprefixer({
+      browsers: ['last 2 versions', 'safari > 5', 'ie > 8', 'ff > 17', 'opera > 12.1', 'ios > 6', 'android > 4']}))
+    .pipe(gulp.dest(source));
 });
 
 
