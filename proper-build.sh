@@ -13,6 +13,8 @@ if [ "$1" == "pull" ]; then
 fi
 
 BUILD_CONTAINER_ID=$(docker ps -a --filter name=proper-build --format "{{.ID}}")
+APP_CONTAINER_NAME=${PWD##*/}
+APP_URL=$(docker exec -it $APP_CONTAINER_NAME /bin/bash -c 'echo $VIRTUAL_HOST')
 
 # Remove the container if it's hanging around
 if [ ! -z $BUILD_CONTAINER_ID ]; then
@@ -21,5 +23,8 @@ fi
 
 docker run --rm -ti \
     --name=proper-build \
+    --link httpsportallocal_nginx_1:$APP_URL \
+    -p 3000:3000 \
+    -p 3001:3001 \
     -v $(PWD):/source \
     properdesign/proper-build "$@"

@@ -177,7 +177,7 @@ gulp.task('autoprefixer', function () {
 // Browsersync
 gulp.task('browsersync', function() {
   browserSync({
-    proxy: "groundwork",
+    proxy: "https://" + process.env.VIRTUAL_HOST,
     files: ["style.css", "*.js", "*.php", "*.html"]
   });
 });
@@ -194,4 +194,4 @@ gulp.task('watch', function(){
 });
 
 // Default Task
-gulp.task('default', ['lint', 'sass', 'scripts', 'watch']);
+gulp.task('default', ['lint', 'sass', 'scripts', 'watch', 'browsersync']);
