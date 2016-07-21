@@ -17,7 +17,7 @@ APP_CONTAINER_NAME=${PWD##*/}
 APP_URL=$(docker exec -it $APP_CONTAINER_NAME /bin/bash -c 'echo $VIRTUAL_HOST')
 
 # Remove the container if it's hanging around
-if [ ! -z $BUILD_CONTAINER_ID ]; then
+if [ -n $BUILD_CONTAINER_ID ]; then
   docker rm -f $BUILD_CONTAINER_ID
 fi
 
