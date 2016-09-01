@@ -46,7 +46,8 @@ module.exports = {
 		`webpack/hot/only-dev-server`,
 		`${source}/src/index.jsx` // Your appʼs entry point
 	],
-	// devtool: process.env.WEBPACK_DEVTOOL || 'cheap-module-source-map',
+	// Not sure why this isn't working, causing error: Module build failed: Error: "/source/src/index.jsx" is not in the SourceMap.
+	// devtool: process.env.WEBPACK_DEVTOOL || 'cheap-module-source-map', 
 	output: {
 		path: path.join(source, 'public'),
 		filename: 'bundle.js',
