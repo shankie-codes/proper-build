@@ -1,8 +1,18 @@
 #!/bin/bash
 
+# SIGTERM-handler – used to clean up symlinks to the node_modules dir
+term_handler() {
+  # echo 'I ran on termination'
+  find /source/node_modules -maxdepth 1 -lname '*' -exec rm {} \;
+  # if [ $pid -ne 0 ]; then
+  #   kill -SIGTERM "$pid"
+  #   wait "$pid"
+  # fi
+  exit 143; # 128 + 15 -- SIGTERM
+}
+
 ## Function that's run if proper-config.json doesn't have a build.source attribute.
 # Prompt the user for which theme they want to use, and then add a .build attribute onto proper-config.json
-
 add_build_source(){
   # Find all stylesheets. Likely candidates for the Gulp project root
   STYLESHEETS=()
@@ -67,5 +77,12 @@ else
   add_build_source
 fi
 
-# Do a gulp.
-gulp "$@"
+# Symlink the image's node_modules contents into the /source/node_modules directory
+ln -sf /build/node_modules/* /source/node_modules
+# find /build/node_modules -type d -maxdepth 1 -mindepth 1 -print0 | xargs -0 ln -s /source/node_modules
+
+# Trap termination signals
+trap 'kill ${!}; term_handler' SIGTERM
+
+# Run NPM
+npm run "$@"

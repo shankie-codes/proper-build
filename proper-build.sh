@@ -26,5 +26,6 @@ docker run --rm -ti \
     --link httpsportallocal_nginx_1:$APP_URL \
     -p 3000:3000 \
     -p 3001:3001 \
+    -p 8888:8888 \
     -v $(PWD):/source \
     properdesign/proper-build "$@"
