@@ -48,7 +48,7 @@ module.exports = {
 	],
 	// devtool: process.env.WEBPACK_DEVTOOL || 'cheap-module-source-map',
 	output: {
-		path: path.join(__dirname, 'public'),
+		path: path.join(source, 'public'),
 		filename: 'bundle.js',
 		hotUpdateChunkFilename : 'hotupdate.js',
 		hotUpdateMainFilename : 'hotupdate.json'
@@ -61,7 +61,7 @@ module.exports = {
 	},
 	devServer: {
 		contentBase: "./public",
-		outputPath: path.join(__dirname, 'public'), // For WriteFilePlugin
+		outputPath: path.join(source, 'public'), // For WriteFilePlugin
 		filename: 'bundle.js',
 		// do not print bundle build stats
 		noInfo: true,
