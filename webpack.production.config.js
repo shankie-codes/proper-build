@@ -6,6 +6,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 var config = require('/source/proper-config.json');
+var webpackUglifyJsPlugin = require('webpack-uglify-js-plugin');
 
 // var source = `/source/${config.source}`;
 var source = `/source`;
@@ -32,6 +33,7 @@ module.exports = {
 		`${source}/src/index.jsx`
 	],
 	// context : "/source",
+	// devtool : 'source-map',
 	output: {
 		path: path.join(source, 'public'),
 		filename: 'bundle.js'
@@ -49,6 +51,23 @@ module.exports = {
 				NODE_ENV: '"production"'
 			}
 		}),
+		new webpackUglifyJsPlugin({
+		  cacheFolder: path.resolve(__dirname, 'public/cached_uglify/'),
+		  debug: true,
+		  minimize: true,
+		  sourceMap: false,
+		  output: {
+		    comments: false
+		  },
+		  compressor: {
+		    warnings: false
+		  }
+		}),
+		// new webpack.optimize.UglifyJsPlugin({
+  //     compress: {warnings: false},
+  //     output: {comments: false},
+  //     sourceMap: true
+  //   }),
 		// new webpack.optimize.UglifyJsPlugin({
 		// 	compress: {
 		// 		warnings: false,
