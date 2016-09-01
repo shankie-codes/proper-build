@@ -63,19 +63,6 @@ module.exports = {
 		    warnings: false
 		  }
 		}),
-		// new webpack.optimize.UglifyJsPlugin({
-  //     compress: {warnings: false},
-  //     output: {comments: false},
-  //     sourceMap: true
-  //   }),
-		// new webpack.optimize.UglifyJsPlugin({
-		// 	compress: {
-		// 		warnings: false,
-		// 		screw_ie8: true,
-		// 		drop_console: true,
-		// 		drop_debugger: true
-		// 	}
-		// }),
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new ExtractTextPlugin('style.css', {
 			allChunks: true
