@@ -6,7 +6,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 // var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 var config = require('/source/proper-config.json');
-var webpackUglifyJsPlugin = require('webpack-uglify-js-plugin');
+// var webpackUglifyJsPlugin = require('webpack-uglify-js-plugin');
 var getTemplatePath = require('./js/GetTemplatePath.js');
 
 var config = config.build; // Remap this to the bits that we actually need
@@ -54,17 +54,13 @@ module.exports = {
 				NODE_ENV: '"production"'
 			}
 		}),
-		new webpackUglifyJsPlugin({
-		  cacheFolder: path.resolve(source, config.js.destDir, 'cached_uglify'),
-		  debug: true,
-		  minimize: true,
-		  sourceMap: false,
-		  output: {
-		    comments: false
-		  },
-		  compressor: {
-		    warnings: false
-		  }
+		new webpack.optimize.UglifyJsPlugin({
+			compress: {
+				warnings: false,
+				screw_ie8: true,
+				drop_console: true,
+				drop_debugger: true
+			}
 		}),
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new ExtractTextPlugin('style.css', {

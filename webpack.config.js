@@ -7,6 +7,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var WriteFilePlugin = require('write-file-webpack-plugin');
 var config = require('/source/proper-config.json');
 var getTemplatePath = require('./js/GetTemplatePath.js');
+var webpackUglifyJsPlugin = require('webpack-uglify-js-plugin');
 
 const HOST = process.env.HOST || "127.0.0.1";
 const PORT = process.env.PORT || "8888";
@@ -48,7 +49,7 @@ module.exports = {
 		path.join(source, config.js.srcDir, config.js.entrypoint) // Your appʼs entry point
 	],
 	// Not sure why this isn't working, causing error: Module build failed: Error: "/source/src/index.jsx" is not in the SourceMap.
-	// devtool: process.env.WEBPACK_DEVTOOL || 'cheap-module-source-map', 
+	devtool: process.env.WEBPACK_DEVTOOL || 'cheap-module-source-map', 
 	output: {
 		path: path.join(source, config.js.destDir),
 		filename: 'bundle.js',
@@ -86,6 +87,18 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: getTemplatePath()
 		}),
+		// new webpackUglifyJsPlugin({
+		//   cacheFolder: path.resolve(source, config.js.destDir, 'cached_uglify'),
+		//   debug: true,
+		//   minimize: false,
+		//   sourceMap: true,
+		//   output: {
+		//     comments: true
+		//   },
+		//   compressor: {
+		//     warnings: false
+		//   }
+		// }),
 		// new BrowserSyncPlugin(
   //     // BrowserSync options 
   //     {
