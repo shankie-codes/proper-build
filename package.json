@@ -1,6 +1,6 @@
 {
   "name": "proper-build",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Proper Design's build package",
   "main": "''",
   "scripts": {
@@ -16,8 +16,6 @@
   "author": "Proper Design",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "react": "15.3.0",
-    "react-dom": "15.3.0",
     "jquery" : "latest",
     "fitvids": "latest",
     "jquery.cookie": "~1.4.1",
@@ -29,6 +27,7 @@
     "babel-core": "6.14.0",
     "babel-loader": "6.2.4",
     "extract-text-webpack-plugin": "^1.0.1",
+    "file-exists": "^2.0.0",
     "sass-loader": "^4.0.0",
     "node-sass": "^3.8.0",
     "babel-plugin-transform-class-properties": "^6.11.5",

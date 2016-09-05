@@ -10,8 +10,7 @@ var config = require('/source/proper-config.json');
 const HOST = process.env.HOST || "127.0.0.1";
 const PORT = process.env.PORT || "8888";
 
-// var source = `/source/${config.source}/`;
-var source = `/source/`;
+var source = `/source/${config.source}/`;
 
 // global css
 loaders.push({
@@ -61,7 +60,7 @@ module.exports = {
 		loaders
 	},
 	devServer: {
-		contentBase: "./public",
+		contentBase: path.join(source, 'public'),
 		outputPath: path.join(source, 'public'), // For WriteFilePlugin
 		filename: 'bundle.js',
 		// do not print bundle build stats

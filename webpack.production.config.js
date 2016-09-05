@@ -4,12 +4,14 @@ var path = require('path');
 var loaders = require('./webpack.loaders');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+// var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 var config = require('/source/proper-config.json');
 var webpackUglifyJsPlugin = require('webpack-uglify-js-plugin');
+var fileExists = require('file-exists');
 
-// var source = `/source/${config.source}`;
-var source = `/source`;
+var config = config.build; // Remap this to the bits that we actually need
+var source = `/source/${config.source}`;
+
 
 // local css modules
 loaders.push({
@@ -28,15 +30,26 @@ loaders.push({
 	loader: ExtractTextPlugin.extract('style', 'css')
 });
 
+function getTemplatePath(){
+	var templatePath = path.join(source, config.js.srcDir, 'template.html');
+	if(fileExists(templatePath)){
+		return templatePath;
+	}
+	else{
+		return '/build/src/template.html'
+	}
+}
+
 module.exports = {
 	entry: [
-		`${source}/src/index.jsx`
+		// `${source}/src/index.js`
+		path.join(source, config.js.srcDir, config.js.entrypoint)
 	],
 	// context : "/source",
 	// devtool : 'source-map',
 	output: {
-		path: path.join(source, 'public'),
-		filename: 'bundle.js'
+		path: path.join(source, config.js.destDir),
+		filename: config.js.destName
 	},
 	resolve: {
 		extensions: ['', '.js', '.jsx']
@@ -45,14 +58,14 @@ module.exports = {
 		loaders
 	},
 	plugins: [
-		new WebpackCleanupPlugin(),
+		// new WebpackCleanupPlugin(),
 		new webpack.DefinePlugin({
 			'process.env': {
 				NODE_ENV: '"production"'
 			}
 		}),
 		new webpackUglifyJsPlugin({
-		  cacheFolder: path.resolve(__dirname, 'public/cached_uglify/'),
+		  cacheFolder: path.resolve(source, config.js.destDir, 'cached_uglify'),
 		  debug: true,
 		  minimize: true,
 		  sourceMap: false,
@@ -65,10 +78,10 @@ module.exports = {
 		}),
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new ExtractTextPlugin('style.css', {
-			allChunks: true
+			// allChunks: true
 		}),
 		new HtmlWebpackPlugin({
-			template: `${source}/src/template.html`,
+			template: getTemplatePath(),
 			title: 'Webpack App'
 		})
 	]
