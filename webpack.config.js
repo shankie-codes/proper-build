@@ -6,10 +6,12 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 // var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 var WriteFilePlugin = require('write-file-webpack-plugin');
 var config = require('/source/proper-config.json');
+var getTemplatePath = require('./js/GetTemplatePath.js');
 
 const HOST = process.env.HOST || "127.0.0.1";
 const PORT = process.env.PORT || "8888";
 
+var config = config.build; // Remap this to the bits that we actually need
 var source = `/source/${config.source}/`;
 
 // global css
@@ -43,12 +45,12 @@ module.exports = {
 	entry: [
 		`webpack-dev-server/client?http://${HOST}:${PORT}`,
 		`webpack/hot/only-dev-server`,
-		`${source}/src/index.jsx` // Your appʼs entry point
+		path.join(source, config.js.srcDir, config.js.entrypoint) // Your appʼs entry point
 	],
 	// Not sure why this isn't working, causing error: Module build failed: Error: "/source/src/index.jsx" is not in the SourceMap.
 	// devtool: process.env.WEBPACK_DEVTOOL || 'cheap-module-source-map', 
 	output: {
-		path: path.join(source, 'public'),
+		path: path.join(source, config.js.destDir),
 		filename: 'bundle.js',
 		hotUpdateChunkFilename : 'hotupdate.js',
 		hotUpdateMainFilename : 'hotupdate.json'
@@ -60,8 +62,8 @@ module.exports = {
 		loaders
 	},
 	devServer: {
-		contentBase: path.join(source, 'public'),
-		outputPath: path.join(source, 'public'), // For WriteFilePlugin
+		contentBase: path.join(source, config.js.destDir),
+		outputPath: path.join(source, config.js.destDir), // For WriteFilePlugin
 		filename: 'bundle.js',
 		// do not print bundle build stats
 		noInfo: true,
@@ -82,7 +84,7 @@ module.exports = {
 			useHashIndex: true
 		}),
 		new HtmlWebpackPlugin({
-			template: `${source}/src/template.html`
+			template: getTemplatePath()
 		}),
 		// new BrowserSyncPlugin(
   //     // BrowserSync options 
