@@ -7,7 +7,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 // var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 var config = require('/source/proper-config.json');
 var webpackUglifyJsPlugin = require('webpack-uglify-js-plugin');
-var fileExists = require('file-exists');
+var getTemplatePath = require('./js/GetTemplatePath.js');
 
 var config = config.build; // Remap this to the bits that we actually need
 var source = `/source/${config.source}`;
@@ -29,16 +29,6 @@ loaders.push({
 	test: /[\/\\](node_modules|global)[\/\\].*\.css$/,
 	loader: ExtractTextPlugin.extract('style', 'css')
 });
-
-function getTemplatePath(){
-	var templatePath = path.join(source, config.js.srcDir, 'template.html');
-	if(fileExists(templatePath)){
-		return templatePath;
-	}
-	else{
-		return '/build/src/template.html'
-	}
-}
 
 module.exports = {
 	entry: [
