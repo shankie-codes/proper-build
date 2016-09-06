@@ -57,7 +57,11 @@ module.exports = {
 		hotUpdateMainFilename : 'hotupdate.json'
 	},
 	resolve: {
-		extensions: ['', '.js', '.jsx']
+		extensions: ['', '.js', '.jsx'],
+		alias: {
+        'jquery': require.resolve('jquery'),
+        '$': require.resolve('jquery'),
+    }
 	},
 	module: {
 		loaders
