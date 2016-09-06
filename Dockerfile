@@ -10,12 +10,20 @@ MAINTAINER Andrew Shankie <andrew@properdesign.rs>
 
 WORKDIR /build
 
-ADD package.json /build/
+# This slightly convoluted package.json process is so that we can cache the results of the install, while being able to edit scripts
+ADD packageAdditions.json /build/
+ADD packageDependencies.json /build/
+
+RUN cp packageDependencies.json package.json
 
 RUN npm install
 
+RUN rm package.json
+
 ADD . /build/
 ADD ./js /js
+
+RUN node js/mergePackages.js
 
 RUN mkdir /source # In case we're building on the server and not volume-mapping in
 
