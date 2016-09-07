@@ -6,7 +6,7 @@
     "start": "webpack-dev-server --host 0.0.0.0 --progress --profile --colors",
     "lint": "eslint -c /build/.eslintrc.yml --ext js --ext jsx $npm_config_jssrcdir || exit 0",
     "autoprefixer": "postcss -u autoprefixer -r $npm_config_sassdestdir/style.css",
-    "scss": "node-sass --output-style compressed -o $npm_config_sassdestdir/style.css $npm_config_sasssrcdir/style.scss",
+    "scss": "node-sass --output-style compressed -o $npm_config_sassdestdir $npm_config_sasssrcdir/style.scss",
     "build:css": "npm run scss && npm run autoprefixer",
     "waitawhile" : "sleep 100",
     "testenv" : "npm config get jssrcdir"
