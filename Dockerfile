@@ -27,7 +27,6 @@ RUN node js/mergePackages.js
 
 RUN mkdir /source # In case we're building on the server and not volume-mapping in
 
-ENV npm_config_jsSrcDir "/source/themes/Proper-Bear-master/_/js/src"
 # RUN npm config set jsSrcDir "npm set in dockerfile"
 ADD entrypoint.sh /
 

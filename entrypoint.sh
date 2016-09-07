@@ -87,5 +87,7 @@ trap 'kill ${!}; term_handler' SIGTERM
 # Put certain bits of proper-config.json into environment variables so that our NPM scripts can use them
 node /js/setEnvVars.js
 
+source /build/envvars.sh
+
 # Run NPM
 npm run "$@"
