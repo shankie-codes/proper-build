@@ -11,7 +11,6 @@ MAINTAINER Andrew Shankie <andrew@properdesign.rs>
 WORKDIR /build
 
 # This slightly convoluted package.json process is so that we can cache the results of the install, while being able to edit scripts
-ADD packageAdditions.json /build/
 ADD packageDependencies.json /build/
 
 RUN cp packageDependencies.json package.json
@@ -23,14 +22,13 @@ RUN rm package.json
 ADD . /build/
 ADD ./js /js
 
+ADD packageAdditions.json /build/
 RUN node js/mergePackages.js
 
 RUN mkdir /source # In case we're building on the server and not volume-mapping in
 
+ENV npm_config_jsSrcDir "/source/themes/Proper-Bear-master/_/js/src"
+# RUN npm config set jsSrcDir "npm set in dockerfile"
 ADD entrypoint.sh /
-
-#WORKDIR /source
-
-#RUN npm link gulp
 
 ENTRYPOINT ["/entrypoint.sh"]

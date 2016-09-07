@@ -4,11 +4,12 @@
   "scripts": {
     "build": "webpack --config webpack.production.config.js --progress --profile --colors",
     "start": "webpack-dev-server --host 0.0.0.0 --progress --profile --colors",
-    "lint": "eslint --ext js --ext jsx src || exit 0",
+    "lint": "eslint -c /build/.eslintrc.yml --ext js --ext jsx $npm_config_jssrcdir || exit 0",
     "autoprefixer": "postcss -u autoprefixer -r dist/css/*",
     "scss": "node-sass --output-style compressed -o dist/css src/scss",
     "build:css": "npm run scss && npm run autoprefixer",
-    "waitawhile" : "sleep 100"
+    "waitawhile" : "sleep 100",
+    "testenv" : "npm config ls"
   },
   "repository": {
     "type": "git",

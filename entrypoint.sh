@@ -84,5 +84,8 @@ ln -sf /build/node_modules/* /source/node_modules
 # Trap termination signals
 trap 'kill ${!}; term_handler' SIGTERM
 
+# Put certain bits of proper-config.json into environment variables so that our NPM scripts can use them
+node /js/setEnvVars.js
+
 # Run NPM
 npm run "$@"

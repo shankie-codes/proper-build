@@ -24,7 +24,8 @@
     },
     "js" : {
       "srcDir" : "_/js/src",
-      "destName" : "themefunctions.js",
+      "entrypoint": "index.js",
+      "destName": "bundle.js",
       "destDir" : "_/js"
     },
     "sass" : {

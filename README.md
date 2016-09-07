@@ -1,3 +1,5 @@
+[![](https://images.microbadger.com/badges/image/properdesign/proper-build.svg)](https://microbadger.com/images/properdesign/proper-build "Get your own image badge on microbadger.com")
+
 # proper-build – a Docker image for running Proper Design's Gulp pipeline
 
 ## What it does
