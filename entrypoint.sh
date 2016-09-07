@@ -89,5 +89,11 @@ node /js/setEnvVars.js
 
 source /build/envvars.sh
 
-# Run NPM
+# Make NPM be a little more quiet
+# echo "loglevel = warn" > ${HOME}/etc/npmrc
+
+# npm config set loglevel error --global
+# npm config ls -l
+
+# # Run NPM
 npm run "$@"
