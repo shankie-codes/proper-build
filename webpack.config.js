@@ -68,6 +68,15 @@ module.exports = {
 	},
 	devServer: {
 		contentBase: path.join(source, config.js.destDir),
+		proxy: {
+		  '/api/**': {
+		          target: 'https://google.com/',
+		          rewrite: function(req) {
+		            req.url = req.url.replace(/^\/api/, '');
+		          },
+		          changeOrigin: true
+		       }
+		},
 		outputPath: path.join(source, config.js.destDir), // For WriteFilePlugin
 		filename: 'bundle.js',
 		// do not print bundle build stats
