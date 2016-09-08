@@ -4,8 +4,9 @@
   "scripts": {
     "lint": "eslint -c /build/.eslintrc.yml --ext js --ext jsx $npm_config_jssrcdir || exit 0",
 
-    "build:svg" : "svg-sprite-generate -d $npm_config_svgsrcdir -o $npm_config_svgdestpath",
     "svg": "npm run build:svg",
+    "watch:svg" : "onchange $npm_config_svgsrcdir -- npm run build:svg",
+    "build:svg" : "svg-sprite-generate -d $npm_config_svgsrcdir -o $npm_config_svgdestpath",
 
     "scripts" : "npm run build:scripts",
     "watch:scripts": "webpack-dev-server --host 0.0.0.0 --progress --profile --colors",
