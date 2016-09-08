@@ -77,8 +77,12 @@ else
   add_build_source
 fi
 
+# Make the node_modules directory if it doesn't exist
+mkdir -p /source/node_modules
+
 # Symlink the image's node_modules contents into the /source/node_modules directory
-ln -sf /build/node_modules/* /source/node_modules
+# ln -sf /build/node_modules/* /source/node_modules
+ln -sf /source/node_modules/* /build/node_modules/
 # find /build/node_modules -type d -maxdepth 1 -mindepth 1 -print0 | xargs -0 ln -s /source/node_modules
 
 # Trap termination signals

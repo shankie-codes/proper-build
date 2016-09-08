@@ -1,8 +1,8 @@
 {
-  "build" : {
-    "source" : ".",
-    "bower" : {
-      "installDest" : "bower_components",
+  "build": {
+    "source": "themes/Proper-Bear-master",
+    "bower": {
+      "installDest": "bower_components",
       "cssDestName": "thirdparty.css",
       "cssDestDir": "_/css",
       "cssMinDestName": "thirdparty.min.css",
@@ -12,25 +12,25 @@
       "jsMinDestName": "thirdparty.min.js",
       "jsMinDestDir": "_/js"
     },
-    "svg" : {
-      "srcDir" : "_/svg/src",
-      "destName" : "symbols.svg",
-      "destDir" : "_/svg",
+    "svg": {
+      "srcDir": "_/svg/src",
+      "destName": "symbols.svg",
+      "destDir": "_/svg",
       "svgDocumentSettings": {
-        "xmlDeclaration" : true,
-        "namespaceIDs" : false,
-        "doctypeDeclaration" : true
+        "xmlDeclaration": true,
+        "namespaceIDs": false,
+        "doctypeDeclaration": true
       }
     },
-    "js" : {
-      "srcDir" : "_/js/src",
+    "js": {
+      "srcDir": "_/js/src",
       "entrypoint": "index.js",
       "destName": "bundle.js",
-      "destDir" : "_/js"
+      "destDir": "_/js"
     },
-    "sass" : {
-      "srcDir" : "_/scss",
-      "destDir" : ""
+    "sass": {
+      "srcDir": "_/scss",
+      "destDir": ""
     }
   },
   "plugins" : [

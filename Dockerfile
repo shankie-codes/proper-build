@@ -27,6 +27,8 @@ RUN node js/mergePackages.js
 
 RUN mkdir /source # In case we're building on the server and not volume-mapping in
 
+# WORKDIR /source
+
 # Make npm shut up a bit
 ENV npm_config_loglevel silent
 

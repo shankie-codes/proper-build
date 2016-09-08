@@ -2,12 +2,6 @@
   "name": "proper-build",
   "version": "1.0.1",
   "dependencies": {
-    "jquery" : "latest",
-    "fitvids": "latest",
-    "squishMenu" : "latest",
-    "jquery.cookie": "~1.4.1",
-    "npm-modernizr" : "latest",
-    "js-cookie" : "latest"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.6",

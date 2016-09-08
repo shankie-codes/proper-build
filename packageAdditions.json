@@ -24,6 +24,8 @@
     "build:all" : "npm run build:svg && npm run build:scripts && npm run build:styles",
     "build" : "npm run build:all",
 
+    "waitawhile" : "sleep 100000",
+
     "start" : "npm run watch:all"
   },
   "repository": {

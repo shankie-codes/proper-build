@@ -69,10 +69,10 @@ module.exports = {
 	devServer: {
 		contentBase: path.join(source, config.js.destDir),
 		proxy: {
-		  '/api/**': {
-		          target: 'https://google.com/',
+		  '/sync**': {
+		          target: `https://${process.env.APP_HOST_PATH}`,
 		          rewrite: function(req) {
-		            req.url = req.url.replace(/^\/api/, '');
+		            req.url = req.url.replace(/^\/sync/, '');
 		          },
 		          changeOrigin: true
 		       }

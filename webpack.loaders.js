@@ -2,15 +2,15 @@ module.exports = [
 	{
 		test: /\.jsx?$/,
 		exclude: /(node_modules|bower_components)/,
-		loaders: ['react-hot']
+		loaders: [require.resolve('react-hot-loader')]
 	},
 	{
 		test: /\.jsx?$/,
 		exclude: /(node_modules|bower_components)/,
-		loader: 'babel',
+		loader: require.resolve('babel-loader'),
 		query: {
-		  presets: ['es2015', 'react'],
-		  plugins: ['transform-runtime', 'transform-decorators-legacy', 'transform-class-properties'],
+		  presets: [require.resolve('babel-preset-es2015'), require.resolve('babel-preset-react')],
+		  plugins: [require.resolve('babel-plugin-transform-runtime'), require.resolve('babel-plugin-transform-decorators-legacy'), require.resolve('babel-plugin-transform-class-properties')],
 		}
 	},
 	{
