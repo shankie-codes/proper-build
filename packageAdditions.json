@@ -2,25 +2,29 @@
   "description": "Proper Design's build package",
   "main": "''",
   "scripts": {
-    "lint": "eslint -c /build/.eslintrc.yml --ext js --ext jsx $npm_config_jssrcdir || exit 0",
 
     "svg": "npm run build:svg",
     "watch:svg" : "onchange $npm_config_svgsrcdir -- npm run build:svg",
     "build:svg" : "svg-sprite-generate -d $npm_config_svgsrcdir -o $npm_config_svgdestpath",
 
     "scripts" : "npm run build:scripts",
+    "lint:scripts": "eslint -c /build/.eslintrc.yml --ext js --ext jsx $npm_config_jssrcdir || exit 0",
     "watch:scripts": "webpack-dev-server --host 0.0.0.0 --progress --profile --colors",
     "build:scripts": "webpack --config webpack.production.config.js --progress --profile --colors",
 
     "autoprefixer": "postcss -u autoprefixer -r $npm_config_sassdestdir/style.css",
+    "lint:styles": "sass-lint $npm_config_sasssrcdir/**/*.scss -v -q",
     "scss": "node-sass --output-style compressed -o $npm_config_sassdestdir $npm_config_sasssrcdir/style.scss",
     "sass" : "npm run build:styles",
     "styles" : "npm run build:styles",
     "watch:styles" : "node-sass -w --output-style expanded -o $npm_config_sassdestdir $npm_config_sasssrcdir/style.scss",
     "build:styles": "npm run scss && npm run autoprefixer",
 
-    "waitawhile" : "sleep 100",
-    "testenv" : "npm config get jssrcdir"
+    "watch:all" : "npm run watch:svg & npm run watch:scripts & npm run watch:styles",
+    "build:all" : "npm run build:svg && npm run build:scripts && npm run build:styles",
+    "build" : "npm run build:all",
+
+    "start" : "npm run watch:all"
   },
   "repository": {
     "type": "git",

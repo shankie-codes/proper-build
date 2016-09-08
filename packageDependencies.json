@@ -43,7 +43,8 @@
     "webpack-uglify-js-plugin": "^1.1.9",
     "eslint-plugin-react" : "^6.2.0",
     "svg-sprite-generator": "^0.0.7",
-    "onchange": "^3.0.0"
+    "onchange": "^3.0.0",
+    "sass-lint": "^1.9.1"
   },
   "keywords": [
     "starter",

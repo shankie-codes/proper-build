@@ -96,4 +96,10 @@ source /build/envvars.sh
 # npm config ls -l
 
 # # Run NPM
-npm run "$@"
+if [ -z "$@" ]; then
+  # Check if no args were passed. If no args, then just run npm start
+  npm start
+else
+  # Pass on args to npm run
+  npm run "$@"
+fi
