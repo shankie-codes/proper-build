@@ -63,8 +63,8 @@ module.exports = {
 			}
 		}),
 		new webpack.optimize.OccurenceOrderPlugin(),
-		new ExtractTextPlugin('style.css', {
-			// allChunks: true
+		new ExtractTextPlugin(path.join('..', '..', config.sass.srcDir, "external", "_builtbywebpack.scss"), {
+			allChunks: true
 		}),
 		new HtmlWebpackPlugin({
 			template: getTemplatePath(),

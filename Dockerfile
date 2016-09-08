@@ -27,8 +27,9 @@ RUN node js/mergePackages.js
 
 RUN mkdir /source # In case we're building on the server and not volume-mapping in
 
-ENV npm_config_loglevel error
-# RUN npm config set jsSrcDir "npm set in dockerfile"
+# Make npm shut up a bit
+ENV npm_config_loglevel silent
+
 ADD entrypoint.sh /
 
 ENTRYPOINT ["/entrypoint.sh"]

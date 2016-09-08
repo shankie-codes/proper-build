@@ -2,12 +2,21 @@
   "description": "Proper Design's build package",
   "main": "''",
   "scripts": {
-    "build": "webpack --config webpack.production.config.js --progress --profile --colors",
-    "start": "webpack-dev-server --host 0.0.0.0 --progress --profile --colors",
     "lint": "eslint -c /build/.eslintrc.yml --ext js --ext jsx $npm_config_jssrcdir || exit 0",
+
+    "build:svg" : "svg-sprite-generate -d $npm_config_svgsrcdir -o $npm_config_svgdestpath",
+    "svg": "npm run build:svg",
+
+    "scripts" : "npm run build:scripts",
+    "watch:scripts": "webpack-dev-server --host 0.0.0.0 --progress --profile --colors",
+    "build:scripts": "webpack --config webpack.production.config.js --progress --profile --colors",
+
     "autoprefixer": "postcss -u autoprefixer -r $npm_config_sassdestdir/style.css",
     "scss": "node-sass --output-style compressed -o $npm_config_sassdestdir $npm_config_sasssrcdir/style.scss",
-    "build:css": "npm run scss && npm run autoprefixer",
+    "sass" : "npm run build:styles",
+    "styles" : "npm run build:styles",
+    "build:styles": "npm run scss && npm run autoprefixer",
+
     "waitawhile" : "sleep 100",
     "testenv" : "npm config get jssrcdir"
   },
