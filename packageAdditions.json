@@ -15,6 +15,7 @@
     "scss": "node-sass --output-style compressed -o $npm_config_sassdestdir $npm_config_sasssrcdir/style.scss",
     "sass" : "npm run build:styles",
     "styles" : "npm run build:styles",
+    "watch:styles" : "node-sass -w --output-style expanded -o $npm_config_sassdestdir $npm_config_sasssrcdir/style.scss",
     "build:styles": "npm run scss && npm run autoprefixer",
 
     "waitawhile" : "sleep 100",
