@@ -32,11 +32,8 @@ loaders.push({
 
 module.exports = {
 	entry: [
-		// `${source}/src/index.js`
 		path.join(source, config.js.srcDir, config.js.entrypoint)
 	],
-	// context : "/source",
-	// devtool : 'source-map',
 	output: {
 		path: path.join(source, config.js.destDir),
 		filename: config.js.destName

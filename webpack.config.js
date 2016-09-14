@@ -3,7 +3,7 @@ var webpack = require('webpack');
 var path = require('path');
 var loaders = require('./webpack.loaders');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-// var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 var WriteFilePlugin = require('write-file-webpack-plugin');
 var config = require('/source/proper-config.json');
 var getTemplatePath = require('./js/GetTemplatePath.js');
@@ -19,7 +19,7 @@ var source = `/source/${config.source}/`;
 loaders.push({
 	test: /[\/\\](node_modules|global)[\/\\].*\.css$/,
 	loaders: [
-		'style?sourceMap',
+		'style?sourceMap',-
 		'css'
 	]
 });
@@ -48,7 +48,6 @@ module.exports = {
 		`webpack/hot/only-dev-server`,
 		path.join(source, config.js.srcDir, config.js.entrypoint) // Your appʼs entry point
 	],
-	// Not sure why this isn't working, causing error: Module build failed: Error: "/source/src/index.jsx" is not in the SourceMap.
 	devtool: process.env.WEBPACK_DEVTOOL || 'cheap-module-source-map', 
 	output: {
 		path: path.join(source, config.js.destDir),
@@ -71,10 +70,11 @@ module.exports = {
 		proxy: {
 		  '/sync**': {
 		          target: `https://${process.env.APP_HOST_PATH}`,
+		          secure: false,
 		          rewrite: function(req) {
 		            req.url = req.url.replace(/^\/sync/, '');
 		          },
-		          changeOrigin: true
+		          changeOrigin: true,
 		       }
 		},
 		outputPath: path.join(source, config.js.destDir), // For WriteFilePlugin
@@ -83,6 +83,7 @@ module.exports = {
 		noInfo: true,
 		// enable HMR
 		hot: true,
+		https: true,
 		// embed the webpack-dev-server runtime into the bundle
 		inline: true,
 		// serve index.html in place of 404 responses to allow HTML5 history
@@ -121,7 +122,8 @@ module.exports = {
   //       // proxy the Webpack Dev Server endpoint 
   //       // (which should be serving on http://localhost:3100/) 
   //       // through BrowserSync 
-  //       proxy: `http://${HOST}:${PORT}/`
+  //       // proxy: `http://${process.env.APP_HOST_PATH}`,
+  //       proxy: `http://gbhearts`,
   //     },
   //     // plugin options 
   //     {
