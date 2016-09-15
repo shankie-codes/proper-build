@@ -57,13 +57,17 @@ module.exports = {
 	},
 	resolve: {
 		extensions: ['', '.js', '.jsx'],
-		alias: {
-        'jquery': require.resolve('jquery'),
-        '$': require.resolve('jquery'),
-    }
+		// alias: { // Used to be needed to get jquery in the global namespace. Doesn't seemt to be needed now...?
+  //       'jquery': require.resolve('jquery'),
+  //       '$': require.resolve('jquery'),
+  //   },
+    root : ['/build', '/source/'],
+	},
+	resolveLoader : {
+		modulesDirectories : ['/build'],
 	},
 	module: {
-		loaders
+		loaders,
 	},
 	devServer: {
 		contentBase: path.join(source, config.js.destDir),

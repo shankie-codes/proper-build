@@ -1,3 +1,11 @@
+console.log(`Shit! ${require.resolve('babel-loader')}`);
+console.log(`Shit! ${require.resolve('babel-preset-es2015')}`);
+console.log(`Shit! ${require.resolve('babel-preset-react')}`);
+console.log(`Shit! ${require.resolve('babel-plugin-transform-runtime')}`);
+console.log(`Shit! ${require.resolve('babel-plugin-transform-decorators-legacy')}`);
+console.log(`Shit! ${require.resolve('babel-plugin-transform-class-properties')}`);
+// console.log(`Shit! ${require.resolve('babel-runtime')}`);
+
 module.exports = [
 	{
 		test: /\.jsx?$/,
@@ -10,9 +18,28 @@ module.exports = [
 		loader: require.resolve('babel-loader'),
 		query: {
 		  presets: [require.resolve('babel-preset-es2015'), require.resolve('babel-preset-react')],
-		  plugins: [require.resolve('babel-plugin-transform-runtime'), require.resolve('babel-plugin-transform-decorators-legacy'), require.resolve('babel-plugin-transform-class-properties')],
+		  // plugins: [require.resolve('babel-plugin-transform-runtime'), require.resolve('babel-plugin-transform-decorators-legacy'), require.resolve('babel-plugin-transform-class-properties')],
+		  plugins: [require.resolve('babel-plugin-transform-decorators-legacy'), require.resolve('babel-plugin-transform-class-properties')],
 		}
 	},
+	// {
+	// 	test: /\.jsx?$/,
+	// 	exclude: /(node_modules|bower_components)/,
+	// 	loader: 'babel-loader',
+	// 	query: {
+	// 	  presets: ['babel-preset-es2015', 'babel-preset-react'],
+	// 	  plugins: ['babel-plugin-transform-runtime', 'babel-plugin-transform-decorators-legacy', 'babel-plugin-transform-class-properties'],
+	// 	}
+	// },
+	// {
+	// 	test: /\.jsx?$/,
+	// 	exclude: /(node_modules|bower_components)/,
+	// 	loader: '/build/node_modules/babel-loader/index.js',
+	// 	query: {
+	// 	  presets: ['/build/node_modules/babel-preset-es2015/lib/index.js', '/build/node_modules/babel-preset-react/index.js'],
+	// 	  plugins: ['/build/node_modules/babel-plugin-transform-runtime/lib/index.js', '/build/node_modules/babel-plugin-transform-decorators-legacy/lib/index.js', '/build/node_modules/babel-plugin-transform-class-properties/lib/index.js'],
+	// 	}
+	// },
 	{
 		test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
 		exclude: /(node_modules|bower_components)/,

@@ -39,10 +39,18 @@ module.exports = {
 		filename: config.js.destName
 	},
 	resolve: {
-		extensions: ['', '.js', '.jsx']
+		extensions: ['', '.js', '.jsx'],
+		// alias: { // Used to be needed to get jquery in the global namespace. Doesn't seemt to be needed now...?
+  //       'jquery': require.resolve('jquery'),
+  //       '$': require.resolve('jquery'),
+  //   },
+    root : ['/build', '/source/'],
+	},
+	resolveLoader : {
+		modulesDirectories : ['/build'],
 	},
 	module: {
-		loaders
+		loaders,
 	},
 	plugins: [
 		// new WebpackCleanupPlugin(),
