@@ -1,10 +1,3 @@
-console.log(`Shit! ${require.resolve('babel-loader')}`);
-console.log(`Shit! ${require.resolve('babel-preset-es2015')}`);
-console.log(`Shit! ${require.resolve('babel-preset-react')}`);
-console.log(`Shit! ${require.resolve('babel-plugin-transform-runtime')}`);
-console.log(`Shit! ${require.resolve('babel-plugin-transform-decorators-legacy')}`);
-console.log(`Shit! ${require.resolve('babel-plugin-transform-class-properties')}`);
-// console.log(`Shit! ${require.resolve('babel-runtime')}`);
 
 module.exports = [
 	{
@@ -24,7 +17,7 @@ module.exports = [
 	},
 	// {
 	// 	test: /\.jsx?$/,
-	// 	exclude: /(node_modules|bower_components)/,
+	// 	exclude: /(node_modules|bower_conmponents)/,
 	// 	loader: 'babel-loader',
 	// 	query: {
 	// 	  presets: ['babel-preset-es2015', 'babel-preset-react'],
