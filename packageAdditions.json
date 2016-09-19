@@ -9,7 +9,7 @@
 
     "scripts" : "npm run build:scripts",
     "lint:scripts": "eslint -c /build/.eslintrc.yml --ext js --ext jsx $npm_config_jssrcdir || exit 0",
-    "watch:scripts": "webpack-dev-server --host 0.0.0.0 --progress --profile --colors",
+    "watch:scripts": "node browser-sync.js & webpack-dev-server --host 0.0.0.0 --progress --profile --colors",
     "build:scripts": "webpack --config webpack.production.config.js --progress --profile --colors",
 
     "autoprefixer": "postcss -u autoprefixer -r $npm_config_sassdestdir/style.css",
@@ -24,7 +24,6 @@
     "build:all" : "npm run build:svg && npm run build:scripts && npm run build:styles",
     "build" : "npm run build:all",
 
-    "bs" : "node bs.js & npm run watch:scripts",
     "waitawhile" : "sleep 100000",
 
     "start" : "npm run watch:all"
