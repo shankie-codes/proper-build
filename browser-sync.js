@@ -6,6 +6,11 @@ var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 var proxy = require('http-proxy-middleware');
+var path = require('path');
+
+var config = require('/source/proper-config.json');
+var config = config.build; // Remap this to the bits that we actually need
+var source = `/source/${config.source}/`;
 
 /**
  * Require ./webpack.config.js and make a bundler from it
@@ -40,7 +45,8 @@ browserSync({
 	// no need to watch '*.js' here, webpack will take care of it for us,
 	// including full page reloads if HMR won't work
 	files: [
-	  'app/css/*.css',
-	  'app/*.html'
+	  path.join(source, '**/*.php'),
+	  path.join(source, 'style.css'),
+	  path.join(source, config.svg.destDir, config.svg.destName),
 	]
 });
