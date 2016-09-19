@@ -5,12 +5,21 @@ var browserSync = require('browser-sync');
 var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
+var proxy = require('http-proxy-middleware');
 
 /**
  * Require ./webpack.config.js and make a bundler from it
  */
 var webpackConfig = require('./webpack.config');
 var bundler = webpack(webpackConfig);
+
+var dontProxyHotUpdate = proxy('/hotupdate*', {
+    // target: 'https://127.0.0.1:8888/hotupdate.json',
+    target: 'https://127.0.0.1:8888/',
+    changeOrigin: true, // for vhosted sites, changes host header to match to target's host
+    logLevel: 'debug',
+    secure: false
+});
 
 /**
  * Run Browsersync and use middleware for Hot Module Replacement
@@ -47,14 +56,14 @@ browserSync({
 			}),
 			// require("webpack-hot-middleware")(bundler) // I don't think that we want this here as it can be handled by the webpack dev server
 		],
-		proxyReq: [
-			function(proxyReq) {
-				console.log(proxyReq.path);
-				if(proxyReq.path === '/hotupdate.json'){
-					proxyReq.path = 'https://127.0.0.1:8888/hotupdate.json';
-				}
-			}
-		]
+		// proxyReq: [
+		// 	function(proxyReq) {
+		// 		console.log(proxyReq.path);
+		// 		if(proxyReq.path === '/hotupdate.json'){
+		// 			proxyReq.path = 'https://127.0.0.1:8888/hotupdate.json';
+		// 		}
+		// 	}
+		// ]
 	},
 
 	// no need to watch '*.js' here, webpack will take care of it for us,
@@ -65,13 +74,13 @@ browserSync({
 	]
 });
 
-function dontProxyHotUpdate (req, res, next){
-	if(req.url === '/hotupdate.json'){
-		req.url = 'https://127.0.0.1:8888/hotupdate.json';
-	}
-	var parsed = require("url").parse(req.url);
-		if (parsed.pathname.match(/\hotupdate.json$/)) {
-			// res.url = 'https://127.0.0.1:8888/hotupdate.json';
-		}
-	next();
-}
+// function dontProxyHotUpdate (req, res, next){
+// 	if(req.url === '/hotupdate.json'){
+// 		req.url = 'https://127.0.0.1:8888/hotupdate.json';
+// 	}
+// 	var parsed = require("url").parse(req.url);
+// 		if (parsed.pathname.match(/\hotupdate.json$/)) {
+// 			// res.url = 'https://127.0.0.1:8888/hotupdate.json';
+// 		}
+// 	next();
+// }

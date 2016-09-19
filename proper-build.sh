@@ -24,7 +24,6 @@ fi
 docker run --rm -ti \
     --name=proper-build \
     --link httpsportallocal_nginx_1:$APP_HOST_PATH \
-    --link gbhearts \
     -e "APP_HOST_PATH=$APP_HOST_PATH" \
     -p 3000:3000 \
     -p 3001:3001 \

@@ -25,7 +25,8 @@ ADD ./js /js
 ADD packageAdditions.json /build/
 RUN node js/mergePackages.js
 
-RUN mkdir /source # In case we're building on the server and not volume-mapping in
+# In case we're building on the server and not volume-mapping in
+RUN mkdir /source
 
 # WORKDIR /source
 
