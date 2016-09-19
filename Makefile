@@ -1,5 +1,6 @@
 name := proper-build
-image_name := properdesign/$(name)
+# image_name := properdesign/$(name)
+image_name := $(name)
 # FLAGS = -v $(PWD)/sandbox:/source \
         --name $(name)
 
