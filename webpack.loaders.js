@@ -15,24 +15,6 @@ module.exports = [
 		  plugins: [require.resolve('babel-plugin-transform-decorators-legacy'), require.resolve('babel-plugin-transform-class-properties')],
 		}
 	},
-	// {
-	// 	test: /\.jsx?$/,
-	// 	exclude: /(node_modules|bower_conmponents)/,
-	// 	loader: 'babel-loader',
-	// 	query: {
-	// 	  presets: ['babel-preset-es2015', 'babel-preset-react'],
-	// 	  plugins: ['babel-plugin-transform-runtime', 'babel-plugin-transform-decorators-legacy', 'babel-plugin-transform-class-properties'],
-	// 	}
-	// },
-	// {
-	// 	test: /\.jsx?$/,
-	// 	exclude: /(node_modules|bower_components)/,
-	// 	loader: '/build/node_modules/babel-loader/index.js',
-	// 	query: {
-	// 	  presets: ['/build/node_modules/babel-preset-es2015/lib/index.js', '/build/node_modules/babel-preset-react/index.js'],
-	// 	  plugins: ['/build/node_modules/babel-plugin-transform-runtime/lib/index.js', '/build/node_modules/babel-plugin-transform-decorators-legacy/lib/index.js', '/build/node_modules/babel-plugin-transform-class-properties/lib/index.js'],
-	// 	}
-	// },
 	{ test: require.resolve("jquery"),
 		loader: "expose?$!expose?jQuery"
 	},

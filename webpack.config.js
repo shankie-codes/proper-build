@@ -33,15 +33,6 @@ loaders.push({
 	]
 });
 
-// local css modules
-// loaders.push({
-// 	test: /[\/\\]src[\/\\].*\.css/,
-// 	loaders: [
-// 		'style?sourceMap',
-// 		'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
-// 	]
-// });
-
 module.exports = {
 	entry: [
 		`webpack-dev-server/client?http://${HOST}:${PORT}`,
@@ -57,10 +48,10 @@ module.exports = {
 	},
 	resolve: {
 		extensions: ['', '.js', '.jsx'],
-		// alias: { // Used to be needed to get jquery in the global namespace. Doesn't seemt to be needed now...?
-  //       'jquery': require.resolve('jquery'),
-  //       '$': require.resolve('jquery'),
-  //   },
+		alias: {
+        'jquery': '/build/node_modules/jquery/dist/jquery.min.js',
+        '$': '/build/node_modules/jquery/dist/jquery.min.js',
+    },
     root : ['/build', '/source/'],
 	},
 	resolveLoader : {
@@ -104,37 +95,6 @@ module.exports = {
 		}),
 		new HtmlWebpackPlugin({
 			template: getTemplatePath()
-		}),
-		// new webpackUglifyJsPlugin({
-		//   cacheFolder: path.resolve(source, config.js.destDir, 'cached_uglify'),
-		//   debug: true,
-		//   minimize: false,
-		//   sourceMap: true,
-		//   output: {
-		//     comments: true
-		//   },
-		//   compressor: {
-		//     warnings: false
-		//   }
-		// }),
-		// new BrowserSyncPlugin(
-  //     // BrowserSync options 
-  //     {
-  //       // browse to http://localhost:3000/ during development 
-  //       host: 'localhost',
-  //       port: 3000,
-  //       // proxy the Webpack Dev Server endpoint 
-  //       // (which should be serving on http://localhost:3100/) 
-  //       // through BrowserSync 
-  //       // proxy: `http://${process.env.APP_HOST_PATH}`,
-  //       proxy: `http://gbhearts`,
-  //     },
-  //     // plugin options 
-  //     {
-  //       // prevent BrowserSync from reloading the page 
-  //       // and let Webpack Dev Server take care of this 
-  //       reload: false
-  //     }
-  //   )
+		})
 	]
 };
