@@ -7,7 +7,7 @@
 #   cp "$TMPDIR/proper-build.sh" /usr/local/bin/proper-build
 
 # Check if there's a build tool (i.e. proper-build branch) specified in proper-config
-BUILD_TOOL=$(docker run -v ${PWD}/proper-config.json:/node/proper-config.json node:5 node -e 'var config = require("/node/proper-config.json"); console.log(config.build.buildTool);')
+BUILD_TOOL=$(docker run -v ${PWD}/proper-config.json:/node/proper-config.json node:5 node -e 'var config = require("/node/proper-config.json"); if(config.build){console.log(config.build.buildTool);} else{console.log("webpack");}')
 
 if [ "$BUILD_TOOL" == "undefined" ]; then
   BUILD_TOOL="latest"

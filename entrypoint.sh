@@ -17,9 +17,9 @@ add_build_source(){
   # Find all stylesheets. Likely candidates for the Gulp project root
   STYLESHEETS=()
   while IFS=  read -r -d $'\0'; do
-      STYLESHEETS+=($(echo "$REPLY" | sed 's/\/source\///' | sed 's/\/style.css//'))
+      STYLESHEETS+=($(echo "$REPLY" | sed 's/\/source\///' | sed 's/\/index.php//'))
       # echo "$REPLY"
-  done < <(find /source/themes \( -name node_modules -prune \) -o -name "style.css" -print0 )
+  done < <(find /source/themes \( -name node_modules -prune \) -o -name "index.php" -print0 )
   # find /source/themes \( -name node_modules -prune \) -o -name "style.css" | grep style.css
 
   # Give the user the option to add a custom path

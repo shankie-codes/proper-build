@@ -1,6 +1,7 @@
 {
   "build": {
     "source": "themes/Proper-Bear-master",
+    "buildTool": "webpack",
     "bower": {
       "installDest": "bower_components",
       "cssDestName": "thirdparty.css",
