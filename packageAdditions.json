@@ -17,7 +17,7 @@
     "scss": "node-sass --output-style compressed -o $npm_config_sassdestdir $npm_config_sasssrcdir/style.scss",
     "sass" : "npm run build:styles",
     "styles" : "npm run build:styles",
-    "watch:styles" : "node-sass -w --output-style expanded -o $npm_config_sassdestdir $npm_config_sasssrcdir/style.scss",
+    "watch:styles" : "( if [ ! -f $npm_config_sassdestdir/style.css ]; then npm run build:styles; fi) && node-sass -w --output-style expanded -o $npm_config_sassdestdir $npm_config_sasssrcdir/style.scss",
     "build:styles": "npm run scss && npm run autoprefixer",
 
     "watch:all" : "npm run watch:svg & npm run watch:scripts & npm run watch:styles",
