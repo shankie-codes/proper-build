@@ -1,18 +1,6 @@
 {
   "build": {
-    "source": "themes/Proper-Bear-master",
-    "buildTool": "webpack",
-    "bower": {
-      "installDest": "bower_components",
-      "cssDestName": "thirdparty.css",
-      "cssDestDir": "_/css",
-      "cssMinDestName": "thirdparty.min.css",
-      "cssMinDestDir": "_/css",
-      "jsDestName": "thirdparty.js",
-      "jsDestDir": "_/js",
-      "jsMinDestName": "thirdparty.min.js",
-      "jsMinDestDir": "_/js"
-    },
+    "buildTool" : "webpack",
     "svg": {
       "srcDir": "_/svg/src",
       "destName": "symbols.svg",
