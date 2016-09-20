@@ -12,7 +12,6 @@ var getTemplatePath = require('./js/GetTemplatePath.js');
 var config = config.build; // Remap this to the bits that we actually need
 var source = `/source/${config.source}`;
 
-
 // local css modules
 loaders.push({
 	test: /[\/\\]src[\/\\].*\.css/,
@@ -36,11 +35,11 @@ module.exports = {
 	],
 	output: {
 		path: path.join(source, config.js.destDir),
-		filename: config.js.destName
+		filename: config.js.destName || 'bundle.js'
 	},
 	resolve: {
 		extensions: ['', '.js', '.jsx'],
-		alias: { // Used to be needed to get jquery in the global namespace. Doesn't seemt to be needed now...?
+		alias: {
         'jquery': '/build/node_modules/jquery/dist/jquery.min.js',
         '$': '/build/node_modules/jquery/dist/jquery.min.js',
     },
