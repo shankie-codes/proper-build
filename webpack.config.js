@@ -51,7 +51,7 @@ module.exports = {
 	devtool: process.env.WEBPACK_DEVTOOL || 'cheap-module-source-map', 
 	output: {
 		path: path.join(source, config.js.destDir),
-		filename: 'bundle.js',
+		filename: config.js.destName || 'bundle.js',
 		hotUpdateChunkFilename : 'hotupdate.js',
 		hotUpdateMainFilename : 'hotupdate.json'
 	},

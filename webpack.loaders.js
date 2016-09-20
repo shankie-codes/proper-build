@@ -33,6 +33,9 @@ module.exports = [
 	// 	  plugins: ['/build/node_modules/babel-plugin-transform-runtime/lib/index.js', '/build/node_modules/babel-plugin-transform-decorators-legacy/lib/index.js', '/build/node_modules/babel-plugin-transform-class-properties/lib/index.js'],
 	// 	}
 	// },
+	{ test: require.resolve("jquery"),
+		loader: "expose?$!expose?jQuery"
+	},
 	{
 		test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
 		exclude: /(node_modules|bower_components)/,

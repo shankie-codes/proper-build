@@ -40,10 +40,10 @@ module.exports = {
 	},
 	resolve: {
 		extensions: ['', '.js', '.jsx'],
-		// alias: { // Used to be needed to get jquery in the global namespace. Doesn't seemt to be needed now...?
-  //       'jquery': require.resolve('jquery'),
-  //       '$': require.resolve('jquery'),
-  //   },
+		alias: { // Used to be needed to get jquery in the global namespace. Doesn't seemt to be needed now...?
+        'jquery': '/build/node_modules/jquery/dist/jquery.min.js',
+        '$': '/build/node_modules/jquery/dist/jquery.min.js',
+    },
     root : ['/build', '/source/'],
 	},
 	resolveLoader : {
