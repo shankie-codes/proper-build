@@ -14,10 +14,10 @@ if [ "$BUILD_TOOL" == "undefined" ]; then
 fi
 
 # Pull the latest image if we're asked
-if [ "$1" == "pull" ]; then
-  docker pull properdesign/proper-build:$BUILD_TOOL
-  exit
-fi
+# if [ "$1" == "pull" ]; then # We're pulling all the time further down now
+#   docker pull properdesign/proper-build:$BUILD_TOOL
+#   exit
+# fi
 
 BUILD_CONTAINER_ID=$(docker ps -a --filter name=proper-build --format "{{.ID}}")
 APP_CONTAINER_NAME=${PWD##*/}
@@ -35,6 +35,7 @@ if [ "$1" == 'local' ]; then
   shift
 else
   IMAGE_NAME="properdesign/proper-build:$BUILD_TOOL"
+  docker pull $IMAGE_NAME
 fi
 
 docker run --rm -ti \
