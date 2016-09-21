@@ -1,5 +1,6 @@
 {
   "build": {
+    "source" : ".",
     "buildTool" : "webpack",
     "svg": {
       "srcDir": "_/svg/src",
