@@ -5,7 +5,7 @@
 
     "svg": "npm run build:svg",
     "watch:svg" : "onchange $npm_config_svgsrcdir -- npm run build:svg",
-    "build:svg" : "svg-sprite-generate -d $npm_config_svgsrcdir -o $npm_config_svgdestpath",
+    "build:svg" : "[ \"$(ls -A $npm_config_svgsrcdir)\" ] && (svg-sprite-generate -d $npm_config_svgsrcdir -o $npm_config_svgdestpath && echo \"Wrote SVG to $npm_config_svgdestpath\") || echo \"No SVG source files in $npm_config_svgsrcdir\"",
 
     "scripts" : "npm run build:scripts",
     "lint:scripts": "eslint -c /build/.eslintrc.yml --ext js --ext jsx $npm_config_jssrcdir || exit 0",
