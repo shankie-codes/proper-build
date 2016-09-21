@@ -93,6 +93,18 @@ node /js/setEnvVars.js
 
 source /build/envvars.sh
 
+echo "$npm_config_jssrcdir"
+echo "$npm_config_jsentrypoint"
+echo "$npm_config_jsdestname"
+echo "$npm_config_jsdestdir"
+echo "$npm_config_jsdestpath"
+echo "$npm_config_sassdestdir"
+echo "$npm_config_sasssrcdir"
+echo "$npm_config_svgsrcdir"
+echo "$npm_config_svgdestname"
+echo "$npm_config_svgdestpath"
+echo "$npm_config_svgdestdir"
+
 # Make NPM be a little more quiet
 # echo "loglevel = warn" > ${HOME}/etc/npmrc
 
