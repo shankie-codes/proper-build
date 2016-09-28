@@ -19,7 +19,7 @@ var source = `/source/${config.source}/`;
 loaders.push({
 	test: /[\/\\](node_modules|global)[\/\\].*\.css$/,
 	loaders: [
-		'style?sourceMap',-
+		'style?sourceMap',
 		'css'
 	]
 });
@@ -51,6 +51,7 @@ module.exports = {
 		alias: {
         'jquery': '/build/node_modules/jquery/dist/jquery.min.js',
         '$': '/build/node_modules/jquery/dist/jquery.min.js',
+        'openlayers': '/source/node_modules/openlayers/src/ol/index.js'
     },
     root : ['/build', '/source/'],
 	},
