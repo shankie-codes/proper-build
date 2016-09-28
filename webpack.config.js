@@ -48,18 +48,17 @@ module.exports = {
 	},
 	resolve: {
 		extensions: ['', '.js', '.jsx'],
-		alias: {
-        'jquery': '/build/node_modules/jquery/dist/jquery.min.js',
-        '$': '/build/node_modules/jquery/dist/jquery.min.js',
-        'openlayers': '/source/node_modules/openlayers/src/ol/index.js'
-    },
+		// alias : {
+      // 'jquery': '/build/node_modules/jquery/dist/jquery.min.js',
+      // '$': '/build/node_modules/jquery/dist/jquery.min.js',
+  	// },
     root : ['/build', '/source/'],
 	},
 	resolveLoader : {
 		modulesDirectories : ['/build'],
 	},
 	module: {
-		loaders,
+		loaders, noParse: /dist\/ol.js/
 	},
 	devServer: {
 		contentBase: path.join(source, config.js.destDir),
@@ -96,6 +95,11 @@ module.exports = {
 		}),
 		new HtmlWebpackPlugin({
 			template: getTemplatePath()
+		}),
+		new webpack.ProvidePlugin({
+		    $: "jquery",
+		    jQuery: "jquery",
+		    "window.jQuery": "jquery"
 		})
 	]
 };

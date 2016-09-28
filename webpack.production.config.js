@@ -39,10 +39,10 @@ module.exports = {
 	},
 	resolve: {
 		extensions: ['', '.js', '.jsx'],
-		alias: {
-        'jquery': '/build/node_modules/jquery/dist/jquery.min.js',
-        '$': '/build/node_modules/jquery/dist/jquery.min.js',
-    },
+		// alias: {
+  //       'jquery': '/build/node_modules/jquery/dist/jquery.min.js',
+  //       '$': '/build/node_modules/jquery/dist/jquery.min.js',
+  //   },
     root : ['/build', '/source/'],
 	},
 	resolveLoader : {
@@ -73,6 +73,11 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: getTemplatePath(),
 			title: 'Webpack App'
+		})
+		new webpack.ProvidePlugin({
+		    $: "jquery",
+		    jQuery: "jquery",
+		    "window.jQuery": "jquery"
 		})
 	]
 };
