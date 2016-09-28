@@ -12,7 +12,7 @@ module.exports = [
 		query: {
 		  presets: [require.resolve('babel-preset-es2015'), require.resolve('babel-preset-react')],
 		  // plugins: [require.resolve('babel-plugin-transform-runtime'), require.resolve('babel-plugin-transform-decorators-legacy'), require.resolve('babel-plugin-transform-class-properties')],
-		  plugins: [require.resolve('babel-plugin-transform-decorators-legacy'), require.resolve('babel-plugin-transform-class-properties')],
+		  plugins: [require.resolve('babel-plugin-transform-decorators-legacy'), require.resolve('babel-plugin-transform-class-properties'), require.resolve('babel-plugin-transform-object-rest-spread')],
 		}
 	},
 	{ test: require.resolve("jquery"),
