@@ -14,15 +14,23 @@ module.exports = [
 		  plugins: [require.resolve('babel-plugin-transform-decorators-legacy'), require.resolve('babel-plugin-transform-class-properties'), require.resolve('babel-plugin-transform-object-rest-spread')],
 		}
 	},
-	{ test: require.resolve("jquery"),
+	{
+		test: require.resolve("jquery"),
 		loader: "expose?$!expose?jQuery"
 	},
+	{
+    test: /\.modernizrrc$/,
+    loader: require.resolve("modernizr-loader")
+  },
 	{
 		test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
 		exclude: /(node_modules|bower_components)/,
 		loader: "file"
 	},
-  { test: /\.json$/, loader: require.resolve("json-loader")},
+  {
+  	exclude: /(node_modules|bower_components)/,
+  	test: /\.json$/, loader: require.resolve("json-loader")
+  },
 	{
 		test: /\.(woff|woff2)$/,
 		exclude: /(node_modules|bower_components)/,
