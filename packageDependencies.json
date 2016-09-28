@@ -29,6 +29,7 @@
     "html-webpack-plugin": "^2.22.0",
     "http-proxy-middleware" : "^0.17.1",
     "jquery": "^3.1.0",
+    "json-loader": "^0.5.4",
     "node-sass": "^3.8.0",
     "onchange": "^3.0.0",
     "postcss-cli": "^2.6.0",

@@ -23,6 +23,7 @@ module.exports = [
 		exclude: /(node_modules|bower_components)/,
 		loader: "file"
 	},
+  { test: /\.json$/, loader: require.resolve("json-loader")},
 	{
 		test: /\.(woff|woff2)$/,
 		exclude: /(node_modules|bower_components)/,
