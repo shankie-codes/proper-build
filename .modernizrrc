@@ -4,6 +4,14 @@
     "setClasses"
   ],
   "feature-detects": [
-  	"webgl"
+  	"webgl",
+  	"css/flexbox",
+  	"css/flexboxlegacy",
+  	"css/flexwrap",
+  	"svg/inline",
+  	"svg",
+  	"svg/asimg",
+  	"svg/clippaths",
+  	"svg/filters"
   ]
 }
