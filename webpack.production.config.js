@@ -51,6 +51,7 @@ module.exports = {
 	},
 	module: {
 		loaders,
+		noParse: /dist\/ol.js/
 	},
 	plugins: [
 		// new WebpackCleanupPlugin(),
@@ -74,7 +75,7 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: getTemplatePath(),
 			title: 'Webpack App'
-		})
+		}),
 		new webpack.ProvidePlugin({
 		    $: "jquery",
 		    jQuery: "jquery",
