@@ -79,7 +79,7 @@ module.exports = {
 		noInfo: true,
 		// enable HMR
 		hot: true,
-		https: true,
+		// https: config.devToolHttps || true,
 		// embed the webpack-dev-server runtime into the bundle
 		inline: true,
 		// serve index.html in place of 404 responses to allow HTML5 history
