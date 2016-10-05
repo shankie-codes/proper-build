@@ -11,6 +11,7 @@
     "lint:scripts": "eslint -c /build/.eslintrc.yml --ext js --ext jsx $npm_config_jssrcdir || exit 0",
     "lint:scripts-errors": "eslint --quiet -c /build/.eslintrc.yml --ext js --ext jsx $npm_config_jssrcdir || exit 0",
     "watch:scripts": "node browser-sync.js & webpack-dev-server --host 0.0.0.0 --progress --profile --colors",
+    "watch:scripts-no-bs": "webpack-dev-server --host 0.0.0.0 --progress --profile --colors",
     "build:scripts": "webpack --config webpack.production.config.js --progress --profile --colors",
 
     "autoprefixer": "postcss -u autoprefixer -r $npm_config_sassdestdir/style.css",
