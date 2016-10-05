@@ -9,7 +9,7 @@ var config = require('/source/proper-config.json');
 var getTemplatePath = require('./js/GetTemplatePath.js');
 var webpackUglifyJsPlugin = require('webpack-uglify-js-plugin');
 
-const HOST = process.env.HOST || "127.0.0.1";
+const HOST = process.env.HOST || "proper.eu.ngrok.io";
 const PORT = process.env.PORT || "8888";
 
 var config = config.build; // Remap this to the bits that we actually need
@@ -33,9 +33,12 @@ loaders.push({
 	]
 });
 
+var remoteHost = typeof config.devToolSettings.remoteHost !== 'undefined' ? config.devToolSettings.remoteHost : HOST;
+var remotePort = typeof config.devToolSettings.remotePort !== 'undefined' ? config.devToolSettings.remotePort : PORT;
+
 module.exports = {
 	entry: [
-		`webpack-dev-server/client?http://${HOST}:${PORT}`,
+		`webpack-dev-server/client?http://${remoteHost}:${remotePort}`,
 		`webpack/hot/only-dev-server`,
 		path.join(source, config.js.srcDir, config.js.entrypoint) // Your appʼs entry point
 	],
@@ -85,7 +88,7 @@ module.exports = {
 		// serve index.html in place of 404 responses to allow HTML5 history
 		historyApiFallback: true,
 		port: PORT,
-		host: HOST
+		host: HOST,
 	},
 	plugins: [
 		new webpack.NoErrorsPlugin(),
