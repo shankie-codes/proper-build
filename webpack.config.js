@@ -33,8 +33,8 @@ loaders.push({
 	]
 });
 
-var remoteHost = typeof config.devToolSettings.remoteHost !== 'undefined' ? config.devToolSettings.remoteHost : HOST;
-var remotePort = typeof config.devToolSettings.remotePort !== 'undefined' ? config.devToolSettings.remotePort : PORT;
+var remoteHost = typeof config.devToolSettings !== 'undefined' && typeof config.devToolSettings.remoteHost !== 'undefined' ? config.devToolSettings.remoteHost : HOST;
+var remotePort = typeof config.devToolSettings !== 'undefined' && typeof config.devToolSettings.remotePort !== 'undefined' ? config.devToolSettings.remotePort : PORT;
 
 module.exports = {
 	entry: [
