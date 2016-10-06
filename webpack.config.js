@@ -81,10 +81,10 @@ module.exports = {
 		// do not print bundle build stats
 		noInfo: true,
 		// enable HMR
-		hot: typeof config.devToolSettings.hot !== 'undefined' ? config.devToolSettings.hot : true,
-		https: typeof config.devToolSettings.https !== 'undefined' ? config.devToolSettings.https : true,
+		hot: typeof config.devToolSettings !== 'undefined' && typeof config.devToolSettings.hot !== 'undefined' ? config.devToolSettings.hot : true,
+		https: typeof config.devToolSettings !== 'undefined' && typeof config.devToolSettings.https !== 'undefined' ? config.devToolSettings.https : true,
 		// // embed the webpack-dev-server runtime into the bundle
-		inline: typeof config.devToolSettings.inline !== 'undefined' ? config.devToolSettings.inline : true,
+		inline: typeof config.devToolSettings !== 'undefined' && typeof config.devToolSettings.inline !== 'undefined' ? config.devToolSettings.inline : true,
 		// serve index.html in place of 404 responses to allow HTML5 history
 		historyApiFallback: true,
 		port: PORT,
