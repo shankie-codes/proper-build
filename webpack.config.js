@@ -9,7 +9,7 @@ var config = require('/source/proper-config.json');
 var getTemplatePath = require('./js/GetTemplatePath.js');
 var webpackUglifyJsPlugin = require('webpack-uglify-js-plugin');
 
-const HOST = process.env.HOST || "proper.eu.ngrok.io";
+const HOST = process.env.HOST || "127.0.0.1";
 const PORT = process.env.PORT || "8888";
 
 var config = config.build; // Remap this to the bits that we actually need
