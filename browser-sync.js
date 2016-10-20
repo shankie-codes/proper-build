@@ -23,7 +23,7 @@ var dontProxyHotUpdate = proxy(['**/hotupdate*'], {
     target: 'https://127.0.0.1:8888/',
     changeOrigin: true, // for vhosted sites, changes host header to match to target's host
     // logLevel: 'info',
-    logLevel: 'debug',
+    logLevel: 'info',
     pathRewrite: function (path, req) {
     	// console.log(`Tried ${path}`)
     	// return '/';
