@@ -18,10 +18,25 @@ var source = `/source/${config.source}/`;
 var webpackConfig = require('./webpack.config');
 var bundler = webpack(webpackConfig);
 
-var dontProxyHotUpdate = proxy('/hotupdate*', {
+// var dontProxyHotUpdate = proxy(['/thecragg/users/hotupdate.json'], {
+var dontProxyHotUpdate = proxy(['**/hotupdate*'], {
     target: 'https://127.0.0.1:8888/',
     changeOrigin: true, // for vhosted sites, changes host header to match to target's host
+    // logLevel: 'info',
     logLevel: 'debug',
+    pathRewrite: function (path, req) {
+    	// console.log(`Tried ${path}`)
+    	// return '/';
+    	// return path.replace('/thecragg/users', '/');
+    	return path.replace(/^(.*)(hotupdate\..*)/g, '/$2');
+    },
+    // pathRewrite : {
+    // 	'^/thecragg/users' : '/'
+    // },
+    // router : {
+    // 	'localhost:3000/hotupdate.json' : 'https://127.0.0.1:8888/hotupdate.json',
+    // 	'localhost:3000/thecragg/users/hotupdate.json' : 'https://127.0.0.1:8888'
+    // },
     secure: false
 });
 
