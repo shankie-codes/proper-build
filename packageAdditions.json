@@ -28,7 +28,7 @@
 
     "waitawhile" : "sleep 100000",
 
-    "start" : "npm run watch:all"
+    "start" : "npm run build:all && npm run watch:all"
   },
   "repository": {
     "type": "git",
