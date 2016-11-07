@@ -7,17 +7,17 @@
 #   cp "$TMPDIR/proper-build.sh" /usr/local/bin/proper-build
 
 # Check if there's a build tool (i.e. proper-build branch) specified in proper-config
-BUILD_TOOL=$(docker run -v ${PWD}/proper-config.json:/node/proper-config.json node:5 node -e 'var config = require("/node/proper-config.json"); console.log(config.build.buildTool);')
+BUILD_TOOL=$(docker run --rm -v ${PWD}/proper-config.json:/node/proper-config.json node:5 node -e 'var config = require("/node/proper-config.json"); if(config.build){console.log(config.build.buildTool);} else{console.log("webpack");}')
 
 if [ "$BUILD_TOOL" == "undefined" ]; then
   BUILD_TOOL="latest"
 fi
 
 # Pull the latest image if we're asked
-if [ "$1" == "pull" ]; then
-  docker pull properdesign/proper-build:$BUILD_TOOL
-  exit
-fi
+# if [ "$1" == "pull" ]; then # We're pulling all the time further down now
+#   docker pull properdesign/proper-build:$BUILD_TOOL
+#   exit
+# fi
 
 BUILD_CONTAINER_ID=$(docker ps -a --filter name=proper-build --format "{{.ID}}")
 APP_CONTAINER_NAME=${PWD##*/}
@@ -35,6 +35,7 @@ if [ "$1" == 'local' ]; then
   shift
 else
   IMAGE_NAME="properdesign/proper-build:$BUILD_TOOL"
+  docker pull $IMAGE_NAME
 fi
 
 docker run --rm -ti \
