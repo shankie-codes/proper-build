@@ -1,4 +1,4 @@
-// Used to merge package.json with packageAdditions.json so that the Docker build can cash the results of `npm install`
+// Used to merge package.json with packageAdditions.json so that the Docker build can cache the results of `npm install`
 var packageJSON = require('../packageDependencies.json');
 var packageAdditions = require('../packageAdditions.json');
 var fs = require('fs');
