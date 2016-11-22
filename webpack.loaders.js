@@ -2,11 +2,6 @@ module.exports = [
 	{
 		test: /\.jsx?$/,
 		exclude: /(node_modules|bower_components)/,
-		loaders: [require.resolve('react-hot-loader')]
-	},
-	{
-		test: /\.jsx?$/,
-		exclude: /(node_modules|bower_components)/,
 		loader: require.resolve('babel-loader'),
 		query: {
 		  presets: [require.resolve('babel-preset-es2015'), require.resolve('babel-preset-react')],
