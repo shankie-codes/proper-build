@@ -31,6 +31,7 @@ loaders.push({
 
 module.exports = {
 	entry: [
+		'babel-polyfill',
 		path.join(source, config.js.srcDir, config.js.entrypoint)
 	],
 	output: {

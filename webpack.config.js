@@ -40,6 +40,7 @@ module.exports = {
 	entry: [
 		`webpack-dev-server/client?http://${remoteHost}:${remotePort}`,
 		`webpack/hot/only-dev-server`,
+		'babel-polyfill',
 		path.join(source, config.js.srcDir, config.js.entrypoint) // Your appʼs entry point
 	],
 	devtool: process.env.WEBPACK_DEVTOOL || 'source-map', 
