@@ -67,6 +67,10 @@ module.exports = {
 	},
 	devServer: {
 		contentBase: path.join(source, config.js.destDir),
+		headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+    },
 		proxy: {
 		  '/sync**': {
 		          target: `https://${process.env.APP_HOST_PATH}`,
