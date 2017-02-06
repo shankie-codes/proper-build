@@ -48,7 +48,8 @@ module.exports = {
 		path: path.join(source, config.js.destDir),
 		filename: config.js.destName || 'bundle.js',
 		hotUpdateChunkFilename : 'hotupdate.js',
-		hotUpdateMainFilename : 'hotupdate.json'
+		hotUpdateMainFilename : 'hotupdate.json',
+		// publicPath: path.join(source, config.js.destDir, 'public')
 	},
 	resolve: {
 		extensions: ['', '.js', '.jsx'],
