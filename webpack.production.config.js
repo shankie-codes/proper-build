@@ -43,7 +43,6 @@ module.exports = {
 		alias: {
         // 'jquery': '/build/node_modules/jquery/dist/jquery.min.js',
         // '$': '/build/node_modules/jquery/dist/jquery.min.js',
-        modernizr$: path.resolve(__dirname, ".modernizrrc")
     },
     root : ['/build', '/source/'],
 	},
