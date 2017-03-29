@@ -16,10 +16,6 @@ module.exports = [
 		loader: "expose?$!expose?jQuery"
 	},
 	{
-    test: /\.modernizrrc$/,
-    loader: require.resolve("modernizr-loader")
-  },
-	{
 		test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
 		exclude: /(node_modules|bower_components)/,
 		loader: "file"
