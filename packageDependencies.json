@@ -35,8 +35,6 @@
     "imports-loader": "0.6.5",
     "jquery": "^3.1.0",
     "json-loader": "^0.5.4",
-    "modernizr": "^3.3.1",
-    "modernizr-loader": "^0.0.5",
     "module-exists" : "^0.1.1",
     "node-sass": "^3.8.0",
     "onchange": "^3.0.0",

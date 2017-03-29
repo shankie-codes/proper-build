@@ -16,10 +16,10 @@
 
     "autoprefixer": "postcss -u autoprefixer -r $npm_config_sassdestdir/style.css",
     "lint:styles": "sass-lint $npm_config_sasssrcdir/**/*.scss -v -q",
-    "scss": "node-sass --output-style compressed -o $npm_config_sassdestdir $npm_config_sasssrcdir",
+    "scss": "node-sass --source-comments --output-style compressed -o $npm_config_sassdestdir $npm_config_sasssrcdir",
     "sass" : "npm run build:styles",
     "styles" : "npm run build:styles",
-    "watch:styles" : "( if [ ! -f $npm_config_sassdestdir/style.css ]; then npm run build:styles; fi) && node-sass -w --output-style expanded -o $npm_config_sassdestdir $npm_config_sasssrcdir",
+    "watch:styles" : "( if [ ! -f $npm_config_sassdestdir/style.css ]; then npm run build:styles; fi) && node-sass -w --source-comments --output-style expanded -o $npm_config_sassdestdir $npm_config_sasssrcdir",
     "build:styles": "npm run scss && npm run autoprefixer",
 
     "watch:all" : "npm run watch:svg & npm run watch:scripts & npm run watch:styles",
