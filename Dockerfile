@@ -1,4 +1,4 @@
-FROM node:5
+FROM node:7
 MAINTAINER Andrew Shankie <andrew@properdesign.rs>
 
 WORKDIR /build
