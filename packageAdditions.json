@@ -35,5 +35,10 @@
     "url": "propergit:.git"
   },
   "author": "Proper Design",
-  "license": "BSD-2-Clause"
+  "license": "BSD-2-Clause",
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "iOS 7"
+  ]
 }
