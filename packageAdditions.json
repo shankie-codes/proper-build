@@ -23,7 +23,7 @@
     "watch:styles" : "( if [ ! -f $npm_config_sassdestdir/style.css ]; then npm run build:styles; fi) && node-sass -w --source-comments --output-style expanded -o $npm_config_sassdestdir $npm_config_sasssrcdir",
     "build:styles": "npm run scss && npm run autoprefixer",
 
-    "watch:all" : "npm run watch:svg & npm run watch:scripts & npm run watch:styles & npm run watch:autoprefixer",
+    "watch:all" : "npm run watch:svg & npm run watch:scripts & npm run watch:styles",
     "build:all" : "npm run build:svg && npm run build:scripts && npm run build:styles",
     "build" : "npm run build:all",
 
